@@ -149,6 +149,11 @@
                 řádku a zadáte: <programlisting><![CDATA[zf show version]]></programlisting></para>
             <para>Pokud je vše v pořádku, uvidíte:
                 <programlisting><![CDATA[Zend Framework Version: 1.10.0]]></programlisting></para>
+            <para>
+                <emphasis role="bold">Pokud je vaše distribuce PHP dodávána se Zend Frameworkem,
+                    ověřte, zda nepoužívá verzi ZF 1.9, jinak vám tento tutoriál nebude
+                    fungovat.</emphasis>
+            </para>
         </section>
     </section>
     <section>
