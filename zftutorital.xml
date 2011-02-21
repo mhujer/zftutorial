@@ -149,7 +149,7 @@
                 řádku a zadáte: <programlisting><![CDATA[zf show version]]></programlisting></para>
             <para>Pokud je vše v pořádku, uvidíte:
                 <programlisting><![CDATA[Zend Framework Version: 1.10.0]]></programlisting></para>
-            <para>Pokud ne, ověřteš, zda jste správně nastavili cestu a že adresář <code>bin</code>
+            <para>Pokud ne, ověřte, zda jste správně nastavili cestu a že adresář <code>bin</code>
                 v <code>ZendFrameworkCli</code> existuje.</para>
             <para>
                 <emphasis role="bold">Pokud je vaše distribuce PHP dodávána se Zend Frameworkem,
