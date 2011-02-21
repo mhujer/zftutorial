@@ -54,11 +54,11 @@
         <para>Zend Framework je k dispozici ke stažení na adrese <link
                 xlink:href=" http://framework.zend.com/download/latest"
                 >http://framework.zend.com/download/latest</link> buď v .zip nebo .tar.gz formátu.
-            Na konci stránky naleznete přímé odkazy. Verze "Minimal" je to, co potřebuje. </para>
+            Na konci stránky naleznete přímé odkazy. Verze "Minimal" je to, co potřebujete. </para>
     </section>
     <section>
         <title>Nastavení Zend_Tool</title>
-        <para> Zend Framework je dodávan s nástrojem pro příkazovou řádku. Začneme jeho nastavením. </para>
+        <para> Zend Framework je dodávan s nástrojem pro příkazovou řádku. Začneme tedy jeho nastavením. </para>
         <section>
             <title>Zend_Tool na Windows</title>
             <para>
@@ -149,8 +149,8 @@
                 řádku a zadáte: <programlisting><![CDATA[zf show version]]></programlisting></para>
             <para>Pokud je vše v pořádku, uvidíte:
                 <programlisting><![CDATA[Zend Framework Version: 1.10.0]]></programlisting></para>
-            <para>Pokud ne, ověřte, zda jste správně nastavili cestu a že adresář <code>bin</code>
-                v <code>ZendFrameworkCli</code> existuje.</para>
+            <para>Pokud ne, ověřte, zda jste správně nastavili cestu a že adresář <code>bin</code> v
+                    <code>ZendFrameworkCli</code> existuje.</para>
             <para>
                 <emphasis role="bold">Pokud je vaše distribuce PHP dodávána se Zend Frameworkem,
                     ověřte, zda nepoužívá verzi ZF 1.9, jinak vám tento tutoriál nebude
@@ -160,33 +160,81 @@
     </section>
     <section>
         <title>Vlastní aplikace</title>
-        <para>@todo123</para>
+        <para>Teď už je vše připraveno a můžeme se pustit do vytváření Zend Frameworkové aplikace.
+            Nejprve se podíváme, co vlastně budeme dělat. Vytvoříme jednoduchý systém pro evidenci
+            našich CDček. Hlavní stránka nám umožní přidat, upravovat a mazat CDčka. Při vývoji
+            software je vždy dobré trochu plánovat. Náš web se bude skládat ze čtyř stránek:</para>
         <para>
             <informaltable frame="all">
                 <tgroup cols="2">
                     <colspec colname="c1" colnum="1" colwidth="1.0*"/>
-                    <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+                    <colspec colname="c2" colnum="2" colwidth="3.0*"/>
                     <tbody>
                         <row>
                             <entry>Domovská stránka</entry>
-                            <entry>Toto zobrazí seznam alb a odkazy na jejich editaci a smazání.
-                                Bude tam také odkaz na přidání nového alba.</entry>
+                            <entry>Ta zobrazí seznam alb a odkazy na jejich editaci a smazání. Bude
+                                tam také odkaz na přidání nového alba.</entry>
                         </row>
                         <row>
                             <entry>Přidat nové album</entry>
-                            <entry>2</entry>
+                            <entry>Tato stránka bude obsahovat formulář pro přidání nového
+                                alba</entry>
                         </row>
                         <row>
                             <entry>Upravit album</entry>
-                            <entry>3</entry>
+                            <entry>Tato stránka bude obsahovat formulář pro editaci alba</entry>
                         </row>
                         <row>
                             <entry>Smazat album</entry>
-                            <entry>4</entry>
+                            <entry>Tato stránka nejdříve zobrazí potvrzení, zda opravdu chceme album
+                                smazat a pak ho smaže.</entry>
                         </row>
                     </tbody>
                 </tgroup>
             </informaltable>
         </para>
+        <para> Data budeme ukládat do databáze, kde budeme potřebovat jen jednu tabulku: </para>
+        <para><informaltable frame="all">
+                <tgroup cols="4">
+                    <colspec colname="c1" colnum="1" colwidth="1.5*"/>
+                    <colspec colname="c2" colnum="2" colwidth="1.5*"/>
+                    <colspec colname="c3" colnum="3" colwidth="1.0*"/>
+                    <colspec colname="c4" colnum="4" colwidth="2.5*"/>
+                    <thead>
+                        <row>
+                            <entry>Jméno sloupce</entry>
+                            <entry>Typ</entry>
+                            <entry>Null?</entry>
+                            <entry>Poznámky</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>id</entry>
+                            <entry><code>integer</code></entry>
+                            <entry>No</entry>
+                            <entry>Primary key, auto increment</entry>
+                        </row>
+                        <row>
+                            <entry>artist</entry>
+                            <entry><code>varchar(100)</code></entry>
+                            <entry>No</entry>
+                            <entry/>
+                        </row>
+                        <row>
+                            <entry>title</entry>
+                            <entry><code>varchar(100)</code></entry>
+                            <entry>No</entry>
+                            <entry/>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </informaltable></para>
+    </section>
+    <section>
+        <title>Začínáme vytvářet aplikaci</title>
+        <para>Abychom si ušetřili práci a čas, budeme co nejvíce používat nástroj <code>zf</code>.
+            První úkol je vytvoření kostry souborů a adresářů.</para>
+        <para>@todo</para>
     </section>
 </article>
