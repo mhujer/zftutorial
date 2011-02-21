@@ -12,14 +12,18 @@
             <email>mhujer@gmail.com</email>
         </author>
     </info>
-    <para><emphasis role="italic">Tento text je překladem anglického návodu <link
+    <para>
+        <emphasis role="italic">Tento text je překladem anglického návodu <link
                 xlink:href="http://akrabat.com/zend-framework-tutorial/">Tutorial: Getting Started
-                with Zend Framework 1.10</link>, jehož autorem je Rob Allen</emphasis></para>
+                with Zend Framework 1.10</link>, jehož autorem je Rob Allen</emphasis>
+    </para>
     <para>Učelem tutoriálu je představení použití Zend Frameworku vytvořením jednoduché databázové
         aplikace s využitím vzoru Model-View-Controller.</para>
-    <para><emphasis role="bold"> Poznámka: Tento tutoriál byl testován na Zend Framework verze
-            1.10.3. Je velká šance, že bude fungovat s následujícími verzemi řady 1.x, ale nebude
-            fungovat s verzemi předcházejícími 1.10.</emphasis></para>
+    <para>
+        <emphasis role="bold"> Poznámka: Tento tutoriál byl testován na Zend Framework verze 1.10.3.
+            Je velká šance, že bude fungovat s následujícími verzemi řady 1.x, ale nebude fungovat s
+            verzemi předcházejícími 1.10.</emphasis>
+    </para>
     <section>
         <title>Požadavky</title>
         <para>Zend Framework má tyto požadavky:<itemizedlist>
@@ -57,21 +61,101 @@
         <para> Zend Framework je dodávan s nástrojem pro příkazovou řádku. Začneme jeho nastavením. </para>
         <section>
             <title>Zend_Tool na Windows</title>
-            <para>@todo</para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Vytvořte nový adresář v <code>Program Files</code> pojmenovaný
+                                <code>ZendFrameworkCli</code></para>
+                    </listitem>
+                    <listitem>
+                        <para>Poklikejte na stažený soubor,
+                                <code>ZendFramework-1.10.6-minimal.zip.</code></para>
+                    </listitem>
+                    <listitem>
+                        <para>Zkopírujte adresáře <code>bin</code> a <code>library</code> do složky
+                                <code>C:\Program Files\ZendFrameworkCli</code>. Složka teď bude mít
+                            dva podadresáře <code>bin</code> a <code>library</code>.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Přidejte adresář <code>bin</code> do systémové cesty:</para>
+                        <para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>Ovládací panely -> Systém</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Upřesnit nastavení systému -> karta Upřesnit -> Proměnné
+                                        prostředí</para>
+                                </listitem>
+                                <listitem>
+                                    <para>V části "Systémové proměnné" najděte <code>Path</code> a
+                                        poklikejte na ni</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Přidejte <code>;C:\Program
+                                            Files\ZendFrameworkCli\bin</code> na konec pole a
+                                        stiskněte OK. (Středník na začátku je důležitý!)</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Restartuje PC. (Pozn. možná to půjde i bez toho)</para>
+                                </listitem>
+                            </itemizedlist>
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
         </section>
         <section>
             <title>Zend_Tool na OS X (na Linuxu je to stejné)</title>
-            <para>@todo</para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Rozbalte stažený soubor <code>ZendFramework-1.10.6-minimal.zip.</code>
+                            ve vaší složce <code>Downloads</code> poklikáním na něj.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Zkopírujte do <code>/usr/local/ZendFrameworkCli</code> - otevřete
+                            Terminal a napište:</para>
+                        <para>
+                            <code>sudo cp -r ~/Downloads/ZendFramework-1.10.6-minimal
+                                /usr/local/ZendFrameworkCli</code>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Přidejte si alias do svého bash profilu: <itemizedlist>
+                                <listitem>
+                                    <para>Do Terminalu zadejte <code>open
+                                        ~/.bash_profile</code></para>
+                                </listitem>
+                                <listitem>
+                                    <para>Na konec souboru přidejte <code>alias
+                                            zf=/usr/local/ZendFrameworkCli/bin/zf.sh</code></para>
+                                </listitem>
+                                <listitem>
+                                    <para>Uložte a zavřete TextEdit</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Zavřete Terminal</para>
+                                </listitem>
+                            </itemizedlist>
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
         </section>
         <section>
             <title>Otestování Zend_Tool</title>
-            <para>@todo</para>
+            <para>To, že jste Zend_Tool správně nainstalovali ověříte tak, že otevřete příkazovou
+                řádku a zadáte: <programlisting><![CDATA[zf show version]]></programlisting></para>
+            <para>Pokud je vše v pořádku, uvidíte:
+                <programlisting><![CDATA[Zend Framework Version: 1.10.0]]></programlisting></para>
         </section>
     </section>
     <section>
         <title>Vlastní aplikace</title>
-        <para>@otod</para>
-        <para><informaltable frame="all">
+        <para>@tod</para>
+        <para>
+            <informaltable frame="all">
                 <tgroup cols="2">
                     <colspec colname="c1" colnum="1" colwidth="1.0*"/>
                     <colspec colname="c2" colnum="2" colwidth="1.0*"/>
@@ -95,6 +179,7 @@
                         </row>
                     </tbody>
                 </tgroup>
-            </informaltable></para>
+            </informaltable>
+        </para>
     </section>
 </article>
