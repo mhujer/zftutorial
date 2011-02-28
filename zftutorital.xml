@@ -20,7 +20,7 @@
     <para>Učelem tutoriálu je představení použití Zend Frameworku vytvořením jednoduché databázové
         aplikace s využitím vzoru Model-View-Controller.</para>
     <para>
-        <emphasis role="bold"> Poznámka: Tento tutoriál byl testován na Zend Framework verze 1.10.3.
+        <emphasis role="bold">Poznámka: Tento tutoriál byl testován na Zend Framework verze 1.10.3.
             Je velká šance, že bude fungovat s následujícími verzemi řady 1.x, ale nebude fungovat s
             verzemi předcházejícími 1.10.</emphasis>
     </para>
@@ -41,13 +41,14 @@
         <para>Předpokládám, že používáte webový server Apache a PHP 5.2.4 nebo vyšší. <emphasis
                 role="bold">Je nutné, aby jste měli v Apachi nainstalované a nastavené rozšíření
                 mod_rewrite</emphasis></para>
-        <para>Je také nutné se ujistit, že Apache má nastavenou podporu souboru .htaccess. To se
-            obvykle dělá pomocí změny:
+        <para>Je také nutné se ujistit, že Apache má nastavenou podporu souboru
+                <filename>.htaccess</filename>. To se obvykle dělá pomocí změny:
             <programlisting language="apache"><![CDATA[AllowOverride None]]></programlisting> na
             <programlisting language="apache"><![CDATA[AllowOverride All]]></programlisting> v
-            souboru httpd.conf. Podrobnější informace zjistíte v dokumentaci k Apache. Pokud nebude
-            mít správně nastavený <code>mod_rewrite</code> a .htaccess, tak nebude moci otevřít
-            jinou stránku než homepage. </para>
+            souboru <filename>httpd.conf</filename>. Podrobnější informace zjistíte v dokumentaci k
+            Apache. Pokud nebude mít správně nastavený <code>mod_rewrite</code> a
+                <filename>.htaccess</filename>, tak nebude moci otevřít jinou stránku než homepage.
+        </para>
     </section>
     <section>
         <title>Získání frameworku</title>
@@ -58,23 +59,25 @@
     </section>
     <section>
         <title>Nastavení Zend_Tool</title>
-        <para> Zend Framework je dodávan s nástrojem pro příkazovou řádku. Začneme tedy jeho nastavením. </para>
+        <para> Zend Framework je dodávan s nástrojem pro příkazovou řádku. Začneme tedy jeho
+            nastavením. </para>
         <section>
             <title>Zend_Tool na Windows</title>
             <para>
                 <itemizedlist>
                     <listitem>
                         <para>Vytvořte nový adresář v <code>Program Files</code> pojmenovaný
-                                <code>ZendFrameworkCli</code></para>
+                                <filename>ZendFrameworkCli</filename></para>
                     </listitem>
                     <listitem>
                         <para>Poklikejte na stažený soubor,
-                                <code>ZendFramework-1.10.6-minimal.zip.</code></para>
+                                <filename>ZendFramework-1.10.6-minimal.zip.</filename></para>
                     </listitem>
                     <listitem>
                         <para>Zkopírujte adresáře <code>bin</code> a <code>library</code> do složky
-                                <code>C:\Program Files\ZendFrameworkCli</code>. Složka teď bude mít
-                            dva podadresáře <code>bin</code> a <code>library</code>.</para>
+                                <filename>C:\Program Files\ZendFrameworkCli</filename>. Složka teď
+                            bude mít dva podadresáře <filename>bin</filename> a
+                                <filename>library</filename>.</para>
                     </listitem>
                     <listitem>
                         <para>Přidejte adresář <code>bin</code> do systémové cesty:</para>
@@ -110,12 +113,13 @@
             <para>
                 <itemizedlist>
                     <listitem>
-                        <para>Rozbalte stažený soubor <code>ZendFramework-1.10.6-minimal.zip.</code>
-                            ve vaší složce <code>Downloads</code> poklikáním na něj.</para>
+                        <para>Rozbalte stažený soubor
+                                <filename>ZendFramework-1.10.6-minimal.zip.</filename> ve vaší
+                            složce <filename>Downloads</filename> poklikáním na něj.</para>
                     </listitem>
                     <listitem>
-                        <para>Zkopírujte do <code>/usr/local/ZendFrameworkCli</code> - otevřete
-                            Terminal a napište:</para>
+                        <para>Zkopírujte do <filename>/usr/local/ZendFrameworkCli</filename> -
+                            otevřete Terminal a napište:</para>
                         <para>
                             <code>sudo cp -r ~/Downloads/ZendFramework-1.10.6-minimal
                                 /usr/local/ZendFrameworkCli</code>
@@ -149,8 +153,9 @@
                 řádku a zadáte: <programlisting><![CDATA[zf show version]]></programlisting></para>
             <para>Pokud je vše v pořádku, uvidíte:
                 <programlisting><![CDATA[Zend Framework Version: 1.10.0]]></programlisting></para>
-            <para>Pokud ne, ověřte, zda jste správně nastavili cestu a že adresář <code>bin</code> v
-                    <code>ZendFrameworkCli</code> existuje.</para>
+            <para>Pokud ne, ověřte, zda jste správně nastavili cestu a že adresář
+                    <filename>bin</filename> v <filename>ZendFrameworkCli</filename>
+                existuje.</para>
             <para>
                 <emphasis role="bold">Pokud je vaše distribuce PHP dodávána se Zend Frameworkem,
                     ověřte, zda nepoužívá verzi ZF 1.9, jinak vám tento tutoriál nebude
@@ -233,8 +238,61 @@
     </section>
     <section>
         <title>Začínáme vytvářet aplikaci</title>
-        <para>Abychom si ušetřili práci a čas, budeme co nejvíce používat nástroj <code>zf</code>.
-            První úkol je vytvoření kostry souborů a adresářů.</para>
-        <para>@todo</para>
+        <para>Abychom si ušetřili práci a čas, budeme co nejvíce používat nástroj
+                <filename>zf</filename>. První úkol je vytvoření kostry souborů a adresářů.</para>
+        <para>Otevřte Terminal nebo příkazovou řádku a přepněte se do kořenového adresáře webového
+            serveru. Například pro xampp to bude <filename>C:/xampp/htdocs/</filename>. Ujistěte se,
+            že tam máte oprávnění pro zápis a webovým server může číst. Zadejte:</para>
+        <para><code>zf create project zf-tutorial</code></para>
+        <para>ZF vytvoří adresář <filename>zf-tutorial</filename> a v něm doporučenou strukturu. Ta
+            předpokládá, že máte úplnou kontrolu nad nastavením Apache a proto umístí většinu
+            souborů mimo root webu. Měli by jste vidět tyto soubory a adresáře:</para>
+        <para><inlinemediaobject>
+                <imageobject>
+                    <imagedata fileref="img/directory-structure.png"/>
+                </imageobject>
+            </inlinemediaobject></para>
+        <para>V adresáři <filename>public</filename> je ještě skrytý soubor
+                <filename>.htaccess</filename></para>
+        <para>Aplikace je uložena v adresáři <filename>application</filename>. Jak je vidět na
+            obrázku, máme samostatné adresáře pro soubory modelu, view a controllerů. Adresář
+                <filename>public/</filename> je adresář přístupný z webu, takže URL naší aplikace
+            bude <uri>http://localhost/zf-tutorial/public/</uri>. Díky tomu není většina aplikace
+            přístupná z webu a je tudíž bezpečnější.</para>
+        <note>
+            <para>Poznámka: Na živém serveru by jste vytvořili virtual host a nastavili document
+                root přímo do adresáře <filename>public</filename>. Například pokud by jste
+                vytvářeli virtual host pojmenovaný zf-tutorial.localhost, tak by to vypadalo nějak
+                takto:</para>
+            <para><programlisting language="apache"><![CDATA[<VirtualHost *:80>
+    ServerName zf-tutorial.localhost
+    DocumentRoot /var/www/html/zf-tutorial/public
+    <Directory "/var/www/html/zf-tutorial/public">
+        AllowOverride All
+    </Directory>
+    </VirtualHost>]]></programlisting></para>
+            <para>Web potom bude přístupný přes <uri> http://zf-tutorial.localhost/</uri>. Ujistěte
+                se, že jste v souboru <filename>/etc/hosts</filename> nebo
+                    <filename>c:\windows\system32\drivers\etc\hosts</filename> nasměrovali
+                    <uri>zf-tutorial.localhost</uri> na 127.0.0.1. V tomto tutoriálu to tak dělat
+                nebudeme, pro testování použijeme jen podadresář.</para>
+        </note>
+        <para>Obrázky, JavaScript a CSS soubory jsou uloženy v samostatných podadresářích v adresáři
+                <filename>public/</filename>. Stažený Zend Framework umístíme do adresáře
+                <filename>library/</filename>. Pokud budeme potřebovat další knihovny, tak ty patří
+            také tam.</para>
+        <para>Zkopírujte adresář <filename>library/Zend/</filename> ze staženého archivu
+                <filename>ZendFramework-1.10.6-minimal.zip</filename> do vytvořeného
+                <filename>zf-tutorial/library</filename>. Adresář
+                <filename>zf-tutorial/library/</filename> bude tedy obsahovat adresář
+                <filename>Zend</filename>.</para>
+        <para>To, že je vše v pořádku můžete ověřit otevřením adresy
+                <uri>http://localhost/zf-tutorial/public</uri>. Měli by jste vidět něco jako
+            tohle:</para>
+        <para><inlinemediaobject>
+                <imageobject>
+                    <imagedata fileref="img/basic-app-homepage.png"/>
+                </imageobject>
+            </inlinemediaobject></para>
     </section>
 </article>
