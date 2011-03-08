@@ -294,5 +294,30 @@
                     <imagedata fileref="img/basic-app-homepage.png"/>
                 </imageobject>
             </inlinemediaobject></para>
+        <section>
+            <title>Princip bootstrapování</title>
+            <para>Zend Framework využívá návrhový vzor Front Controller, kdy se všechy požadavky
+                zpracovávají v jednom souboru <filename>index.php</filename>. Toho dosáhneme
+                využitím souboru <filename>.htaccess</filename> v adresáři
+                    <filename>zf-tutorial/public</filename>, který pro nás vytvořil
+                    <code>Zend_Tool</code>. Ten přesměrová všechny požadavky na
+                    <filename>public/index.php</filename>, který nám také vytvořil
+                    <code>Zend_Tool</code>.</para>
+            <para>Soubor <filename>index.php</filename> tvoří vstupní bod do naší aplikace a jeho
+                úkolem je inicializace aplikace vytvořením instance <code>Zend_Application</code> a
+                nastavení konstant <code>APPLICATION_PATH</code> a <code>APPLICATION_ENV</code>,
+                který definují cestu do adresáře <filename>application/</filename> a prostředí
+                (neboli mód) aplikace. Výchozím prostředím je <code>production</code> a je vhodné ho
+                změnit na <code>development</code> přidání řádku do souboru
+                    <filename>.htaccess</filename>:</para>
+            <para><programlisting language="php">SetEnv APPLICATION_ENV development</programlisting>
+                Komponenta <code>Zend_Application</code> je použita ke spuštění aplikace a je
+                nastavena pomocí konfiguračního souboru
+                    <filename>application/configs/application.ini</filename>, který nám byl také
+                předgenerován. Bootstrapovací třída, která dědí od <code>
+                    Zend_Application_Bootstrap_Bootstrap</code> je k dispozici v
+                    <filename>application/Bootstrap.php</filename> a může být použita pro specifický
+                kód inicializující naši aplikaci.</para>
+        </section>
     </section>
 </article>
