@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?oxygen RNGSchema="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" type="xml"?>
 <article xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
-    version="5.0">
+    version="5.0" xml:lang="cs">
     <info>
         <title>Začínáme se Zend Frameworkem 1.10</title>
         <author>
@@ -310,14 +310,48 @@
                 (neboli mód) aplikace. Výchozím prostředím je <code>production</code> a je vhodné ho
                 změnit na <code>development</code> přidání řádku do souboru
                     <filename>.htaccess</filename>:</para>
-            <para><programlisting language="php">SetEnv APPLICATION_ENV development</programlisting>
-                Komponenta <code>Zend_Application</code> je použita ke spuštění aplikace a je
+            <programlisting language="php">SetEnv APPLICATION_ENV development</programlisting>
+            <para>Komponenta <code>Zend_Application</code> je použita ke spuštění aplikace a je
                 nastavena pomocí konfiguračního souboru
                     <filename>application/configs/application.ini</filename>, který nám byl také
                 předgenerován. Bootstrapovací třída, která dědí od <code>
                     Zend_Application_Bootstrap_Bootstrap</code> je k dispozici v
                     <filename>application/Bootstrap.php</filename> a může být použita pro specifický
                 kód inicializující naši aplikaci.</para>
+            <para>Soubor <filename>application.ini</filename>, který je uložen v adresáři
+                    <filename>application/configs</filename> je načítán pomocí
+                    <code>Zend_Config_Ini</code>. Ten umí interpretovat dědičnost sekcí, kterou
+                uvedeme pomocí dvojtečky. Například: </para>
+            <programlisting language="ini">[staging : production]</programlisting>
+            <para>To znamená, že sekce <code>staging</code> dědí nastavení sekce
+                    <code>production</code>. Konstanta <code>APPLICATION_ENV</code> určuje, která
+                sekce se načte. Při vývoji chceme používat sekci <code>development</code> a na živém
+                serveru <code>production</code>. Všechny změny v <code>application.ini</code> budeme
+                vkládat do sekce <code>production</code>. Tím docílíme toho,že všechny varianty
+                konfigurace budou obsahovat to, co jsme přidali.</para>
         </section>
+        <section>
+            <title>Úpravy souboru application.ini</title>
+            <para>První změna kterou musíme udělat je nastavení naší časové zóny, aby správně
+                fungovaly PHPčkové funkce pro práci s datem a časem. Upravíme
+                    <filename>application/configs/application.ini</filename> a přidáme:</para>
+            <programlisting language="ini">phpSettings.date.timezone = "Europe/Prague"</programlisting>
+            <para>pod všechny hodnoty <code>phpSettings</code> v sekci <code>[production]</code>.
+                Samozřejmě volbu můžeme upravit podle své časové zóny. Teď už jsme připraveni začít
+                přidávat kód specifický pro naši aplikaci.</para>
+        </section>
+    </section>
+    <section>
+        <title>Kód naší aplikace</title>
+        <para>Předtím než začneme nastavovat naše soubory, je nutné pochopit, jak je aplikace v Zend
+            Frameworku strukturovaná. Každá stránka aplikace je označována jako <emphasis
+                role="bold">akce</emphasis> [en: action] a ty jsou seskupeny v <emphasis role="bold"
+                >kontrolerech</emphasis> [en: controller]. Pro URL ve formátu
+                <uri>http://localhost/public/zf-tutorial/news/view</uri> je kontroler
+                <code>News</code> a akce <code>view</code>. To umožňuje seskupování souvisejících
+            akcí. Například kontroler <code>News</code> může mít akce <code>list</code>,
+                <code>archived</code>, <code>view</code>. MVC systém Zend Frameworku podporuje také
+            moduly, které slouží k seskupování kontrolerů. Tato aplikace nebude tak veliká, abychom
+            se s nimi museli zabývat.</para>
     </section>
 </article>
