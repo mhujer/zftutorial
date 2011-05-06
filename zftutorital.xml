@@ -422,5 +422,66 @@
                 <filename>application/controllers/ IndexController.php</filename>, který nám
             automaticky vygeneroval Zend_Tool. Obsahuje také první akci, <code>indexAction()</code>,
             takže musíme přidat jen ty zbývající.</para>
+        <para>Další akce se do kontroleru přidávají pomocí nástroje <application>zf</application> a
+            příkazu <command>create action</command>. Otevřeme Terminál nebo příkazovou řádku,
+            přejdeme do našeho adresáře <filename>zf-tutorial/</filename> a zadáme tyto tři příkazy: </para>
+        <programlisting>zf create action add Index
+zf create action edit Index
+zf create action delete Index</programlisting>
+        <para>Těmito příkazy jsme v <code>IndexController</code>u vytvořili tři nové metody:
+                <code>addAction</code>, <code>editAction</code> a <code>deleteAction</code>. Také se
+            nám vygenerovaly příslušné view scripty, které budeme potřebovat později. Teď už máme
+            všechny čtyři akce, které chceme používat.</para>
+        <para>Jejich URL jsou:</para>
+        <para>
+            <table frame="all">
+                <title/>
+                <tgroup cols="2">
+                    <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+                    <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+                    <thead>
+                        <row>
+                            <entry>URL</entry>
+                            <entry>Metoda akce</entry>
+                            <entry/>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>http://localhost/zf-tutorial/public/</entry>
+                            <entry>IndexController::indexAction()</entry>
+                        </row>
+                        <row>
+                            <entry>http://localhost/zf-tutorial/public/index/add</entry>
+                            <entry>IndexController::addAction()</entry>
+                        </row>
+                        <row>
+                            <entry>http://localhost/zf-tutorial/public/index/edit</entry>
+                            <entry>IndexController::editAction()</entry>
+                        </row>
+                        <row>
+                            <entry>http://localhost/zf-tutorial/public/index/delete</entry>
+                            <entry>IndexController::deleteAction()</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </para>
+        <para>Teď si můžete otestovat tři nové akce a měli by jste vidět zprávu jako je tato:</para>
+        <para><emphasis role="italics">View script for controller <emphasis role="bold"
+                    >index</emphasis> and script/action name <emphasis role="bold"
+                >add</emphasis></emphasis>
+        </para>
+        <warning>
+            <para>Pokud uvidíme Chybu 404, tak buď nemáte v Apachi povolený modul
+                    <code>mod_rewrite</code> nebo mátě špatně nastavený <code>AllowOverride</code> v
+                konfiguraci Apache a proto se nezpracová soubor <filename>.htaccess</filename> ve
+                složce <filename>public/</filename>.</para>
+        </warning>
+    </section>
+    <section>
+        <title>Databáze</title>
+        <para>Teď když už máme připravenou kostru aplikace s kontrolerem, akcemi a view scripty, je
+            čas se podívat na datový model naší aplikace. @to be contined...</para>
     </section>
 </article>
