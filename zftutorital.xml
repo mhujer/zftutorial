@@ -12,17 +12,17 @@
             <email>mhujer@gmail.com</email>
         </author>
     </info>
-    <para>
-        <emphasis role="italic">Tento text je překladem anglického návodu <link
+    <para><emphasis role="italic">Tento text je překladem anglického návodu <link
                 xlink:href="http://akrabat.com/zend-framework-tutorial/">Tutorial: Getting Started
-                with Zend Framework 1.10</link>, jehož autorem je Rob Allen</emphasis>
+                with Zend Framework 1.10</link>, jehož autorem je Rob Allen (revize
+            1.7.6)</emphasis>
     </para>
     <para>Učelem tutoriálu je představení použití Zend Frameworku vytvořením jednoduché databázové
         aplikace s využitím vzoru Model-View-Controller.</para>
     <para>
-        <emphasis role="bold">Poznámka: Tento tutoriál byl testován na Zend Framework verze 1.10.3.
-            Je velká šance, že bude fungovat s následujícími verzemi řady 1.x, ale nebude fungovat s
-            verzemi předcházejícími 1.10.</emphasis>
+        <emphasis role="bold">Poznámka: Tento tutoriál byl testován na Zend Frameworku od verze
+            1.10.1 do 1.11.4. Je velká šance, že bude fungovat s následujícími verzemi řady 1.x, ale
+            nebude fungovat s verzemi předcházejícími 1.10.1.</emphasis>
     </para>
     <section>
         <title>Požadavky</title>
@@ -347,11 +347,80 @@
             Frameworku strukturovaná. Každá stránka aplikace je označována jako <emphasis
                 role="bold">akce</emphasis> [en: action] a ty jsou seskupeny v <emphasis role="bold"
                 >kontrolerech</emphasis> [en: controller]. Pro URL ve formátu
-                <uri>http://localhost/public/zf-tutorial/news/view</uri> je kontroler
+                <uri>http://localhost/zf-tutorial/public/news/view</uri> je kontroler
                 <code>News</code> a akce <code>view</code>. To umožňuje seskupování souvisejících
             akcí. Například kontroler <code>News</code> může mít akce <code>list</code>,
                 <code>archived</code>, <code>view</code>. MVC systém Zend Frameworku podporuje také
             moduly, které slouží k seskupování kontrolerů. Tato aplikace nebude tak veliká, abychom
             se s nimi museli zabývat.</para>
+        <para>V základním nastavení si Zend Framework rezervuje akci <code>index</code> jako
+            výchozí. To je pro případy jako je <uri>http://localhost/zf-tutorial/public/news/</uri>,
+            kdy není akce zadána. Zavolá se tedy výchozí akce <code>index</code>. Existuje také
+            výchozí jméno kontroleru, <code>index</code>, a proto
+                <uri>http://localhost/zf-tutorial/public/</uri> zavolá akci <code>index</code> z
+                <code>Index</code> kontroleru.</para>
+        <para>Protože jsme v jednoduchém tutoriálu, tak se nebudeme zabývat <quote>složitými</quote>
+            věcmi jako je přihlašování apod. To může počkat do samostatného návodu (a nebo si o tom
+            můžete přečíst v <emphasis role="italics">Zend Framework in Action</emphasis>!).</para>
+        <para>Máme čtyři stránky, které se vztahují k albům a ty seskupíme do jednoho kontoleru jako
+            čtyři akce. Použijeme výchozí kontoler [<code>Index</code>] a akce v něm budou:</para>
+        <para>
+            <table frame="all">
+                <title/>
+                <tgroup cols="3">
+                    <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+                    <colspec colname="newCol2" colnum="2"/>
+                    <colspec colname="c2" colnum="3" colwidth="1.0*"/>
+                    <thead>
+                        <row>
+                            <entry>Stránka</entry>
+                            <entry>Kontroler</entry>
+                            <entry>Akce</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>Domácí stránka</entry>
+                            <entry><code>Index</code></entry>
+                            <entry><code>index</code></entry>
+                        </row>
+                        <row>
+                            <entry>Přidat nové album</entry>
+                            <entry><code>Index</code></entry>
+                            <entry><code>add</code></entry>
+                        </row>
+                        <row>
+                            <entry>Editovat album </entry>
+                            <entry><code>Index</code></entry>
+                            <entry><code>edit</code></entry>
+                        </row>
+                        <row>
+                            <entry>Smazat album</entry>
+                            <entry><code>Index</code></entry>
+                            <entry><code>delete</code></entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </para>
+        <para>Až budeme mít složitější web, budeme potřebovat více kontrolerů a pokud to bude
+            potřeba, tak můžeme použít i moduly pro seskupování kontrolerů.</para>
+    </section>
+    <section>
+        <title>Vytvoření kontroleru</title>
+        <para>Třída kontroleru v Zend Frameworku musí být pojmenována <code>{jméno
+                kontroleru}Controller</code>. Všimněte si že <code>{jméno kontroleru}</code> musí
+            začínat velkým písmenem. Tato třída musí být uložena v souboru <filename>{jméno
+                Kontroleru}Controller.php</filename> v adresáři
+                <filename>application/controllers</filename>. Každá akce je <code>public</code>
+            funkce ve třídě kontroleru a musí být pojmenována <code>{jméno akce}Action</code>. V
+            tomto případě začíná <code>{jméno akce}</code> malým písmenem a i zbytek musí být malými
+            písmeny. Názvy kontrolerů a akcí se střídajícími se velkými a malými písmeny jsou
+            povoleny, ale mají svoje pravidla, které je potřeba pochopit dříve, než je začnete
+            používat. Podívejte se do dokumentace!</para>
+        <para>Třída našeho kontroleru <code>IndexController</code> je uložena v souboru
+                <filename>application/controllers/ IndexController.php</filename>, který nám
+            automaticky vygeneroval Zend_Tool. Obsahuje také první akci, <code>indexAction()</code>,
+            takže musíme přidat jen ty zbývající.</para>
     </section>
 </article>
