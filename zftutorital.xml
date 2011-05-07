@@ -262,15 +262,15 @@
         <note>
             <para>Poznámka: Na živém serveru by jste vytvořili virtual host a nastavili document
                 root přímo do adresáře <filename>public</filename>. Například pokud by jste
-                vytvářeli virtual host pojmenovaný zf-tutorial.localhost, tak by to vypadalo nějak
-                takto:</para>
+                vytvářeli virtual host pojmenovaný <code>zf-tutorial.localhost</code>, tak by to
+                vypadalo nějak takto:</para>
             <para><programlisting language="apache"><![CDATA[<VirtualHost *:80>
     ServerName zf-tutorial.localhost
     DocumentRoot /var/www/html/zf-tutorial/public
     <Directory "/var/www/html/zf-tutorial/public">
         AllowOverride All
     </Directory>
-    </VirtualHost>]]></programlisting></para>
+</VirtualHost>]]></programlisting></para>
             <para>Web potom bude přístupný přes <uri> http://zf-tutorial.localhost/</uri>. Ujistěte
                 se, že jste v souboru <filename>/etc/hosts</filename> nebo
                     <filename>c:\windows\system32\drivers\etc\hosts</filename> nasměrovali
@@ -443,7 +443,6 @@ zf create action delete Index</programlisting>
                         <row>
                             <entry>URL</entry>
                             <entry>Metoda akce</entry>
-                            <entry/>
                         </row>
                     </thead>
                     <tbody>
@@ -482,6 +481,65 @@ zf create action delete Index</programlisting>
     <section>
         <title>Databáze</title>
         <para>Teď když už máme připravenou kostru aplikace s kontrolerem, akcemi a view scripty, je
-            čas se podívat na datový model naší aplikace. @to be contined...</para>
+            čas se podívat na datový model naší aplikace. Připomeňme, že model je ta část, která se
+            stará o hlavní úkol aplikace (někdy také nazývané <quote>business rules</quote>. V našem
+            případě se stará o databázi. Použijeme třídu <classname>Zend_Db_Table</classname>, která
+            nám bude hledat, vkládat a mazat řádky z databázové tabulky.</para>
+        <section>
+            <title>Nastavení databáze</title>
+            <para> Abychom mohli použít <classname>Zend_Db_Table</classname>, musíme nastavit, která
+                databáze se má použít a s jakým uživatelským jménem a heslem se má přistupovat.
+                Protože to nechceme dát natvrdo do aplikace, uložíme údaje do konfiguračního
+                souboru. Komponenta <classname>Zend_Application</classname> má resource pro
+                připojení k databázi with a database conﬁguration resource}, takže všechno co musíme
+                udělat je nastavit příslušné údaje v souboru
+                    <filename>configs/application.ini</filename> a ona se postará o zbytek.</para>
+            <para>Otevřeme <filename>configs/application.ini</filename> a přidáme následující řádky
+                na konec sekce <code>[production]</code> (t.j. nad sekci
+                <code>[staging]</code>):</para>
+            <programlisting language="ini">resources.db.adapter = PDO_MYSQL
+resources.db.params.host = localhost
+resources.db.params.username = rob
+resources.db.params.password = 123456
+resources.db.params.dbname = zf-tutorial</programlisting>
+            <para>Samozřejmě by jste měli použít svoje uživatelské jméno, heslo a název databáze, ne
+                moje! Teď se nám bude databázové spojení vytvářet automaticky a nastaví se jako
+                výchozí adaptér <classname>Zend_Db_Table</classname>. O dalším dostupných resource
+                pluginech si můžete přečíst zde:
+                http://framework.zend.com/manual/en/zend.application.available-resources.html</para>
+        </section>
+        <section>
+            <title>Vytvoření databázové tabulky</title>
+            <para>Jak jsme říkali na začátku, bude pro ukládání dat o albech používat databázi.
+                Použijeme MySQL, takže příkaz pro vytvoření tabulky je:</para>
+            <programlisting language="sql">CREATE TABLE albums (
+  id int(11) NOT NULL auto_increment,
+  artist varchar(100) NOT NULL,
+  title varchar(100) NOT NULL,
+  PRIMARY KEY (id)
+);</programlisting>
+            <para>Spusťte ho v nějakém MySQL klientovi, třeba phpMyAdmin nebo přes standardního
+                řádkového MySQL klienta.</para>
+        </section>
+        <section>
+            <title>Vložení testovacích dat</title>
+            <para>Také bychom do tabulky měli vložit nějaké řádky, abychom mohli otestovat, jestli
+                nám hlavní stránka správně načítá data. Použijeme prvních pár
+                    <quote>Nejprodávanějších</quote> CD z britského Amazonu. Ve svém MySQL klientovi
+                spusťte:</para>
+            <programlisting language="sql"><![CDATA[INSERT INTO albums (artist, title) VALUES
+    ('Paolo Nutine', 'Sunny Side Up'),
+    ('Florence + The Machine', 'Lungs'),
+    ('Massive Attack', 'Heligoland'),
+    ('Andre Rieu', 'Forever Vienna'),
+    ('Sade', 'Soldier of Love');]]>
+            </programlisting>
+            <para>Teď už máme v naší databázi nějaká data a můžeme pro ni napsat velmi jednoduchý
+                model.</para>
+        </section>
+    </section>
+    <section>
+        <title>Model</title>
+        <para>To be continued...</para>
     </section>
 </article>
