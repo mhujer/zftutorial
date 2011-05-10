@@ -491,9 +491,9 @@ zf create action delete Index</programlisting>
                 databáze se má použít a s jakým uživatelským jménem a heslem se má přistupovat.
                 Protože to nechceme dát natvrdo do aplikace, uložíme údaje do konfiguračního
                 souboru. Komponenta <classname>Zend_Application</classname> má resource pro
-                připojení k databázi with a database conﬁguration resource}, takže všechno co musíme
-                udělat je nastavit příslušné údaje v souboru
-                    <filename>configs/application.ini</filename> a ona se postará o zbytek.</para>
+                připojení k databázi, takže všechno co musíme udělat je nastavit příslušné údaje v
+                souboru <filename>configs/application.ini</filename> a ona se postará o
+                zbytek.</para>
             <para>Otevřeme <filename>configs/application.ini</filename> a přidáme následující řádky
                 na konec sekce <code>[production]</code> (t.j. nad sekci
                 <code>[staging]</code>):</para>
@@ -540,6 +540,142 @@ resources.db.params.dbname = zf-tutorial</programlisting>
     </section>
     <section>
         <title>Model</title>
+        <para>V Zend Frameworku není třída <classname>Zend_Model</classname>, protože model je vaše
+            business logika a rozhodnutí jak s ní pracovat je na vás. Existuje mnoho komponent,
+            které můžete použít podle toho, co potřebujete. Jeden přístup je použití tříd modelu,
+            které každá reprezentuje jednu entitu ve vaší aplikaci, a využít mapovací objekty, které
+            načítají a ukládají entity do databáze. Tento přístup je popsán v Zend Framework
+            QuickStart na adrese <link
+                xlink:href="http://framework.zend.com/manual/en/learning.quickstart.create-model.html"
+                >http://framework.zend.com/manual/en/learning.quickstart.create-model.html</link>.</para>
+        <para>V tomto tutoriálu vytvoříme model, která dědí od <classname>Zend_Db_Table</classname>
+            a používá <classname>Zend_Db_Table_Row</classname>. Třída
+                <classname>Zend_Db_Table</classname>, implementuje návrhový vzor Table Data Gateway,
+            který umožňuje objektově pracovat s daty v databázové tabulce. Mějte na paměti, že vzor
+            Table Data Gateway může být ve větších systémech limitující.</para>
+        <para>Z abstraktní třídy <classname>Zend_Db_Table_Abstract</classname> budeme dědit naše
+            třídu, které je specifická pro správu alb. Je jedno, jak naši třídu pojmenujeme, ale
+            dává smysl ji pojmenovat jako databázovou tabulku. Náš projekt má výchozí autoloader
+            inicitalizovaný <classname>Zend_Application</classname>. Ten mapuje třídy v modulu na
+            adresář, kde jsou uloženy. Pro složky <filename>application/</filename> používáme prefix
+                <classname>Applcation_</classname>.</para>
+        <para>Autoloader mapuje třídy na adresáře takto:<table frame="all">
+                <title/>
+                <tgroup cols="2">
+                    <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+                    <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+                    <thead>
+                        <row>
+                            <entry>Prefix</entry>
+                            <entry>Adresář</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry><classname>Form</classname></entry>
+                            <entry><filename>forms</filename></entry>
+                        </row>
+                        <row>
+                            <entry><classname>Model</classname></entry>
+                            <entry><filename>models</filename></entry>
+                        </row>
+                        <row>
+                            <entry><classname>Model_DbTable</classname></entry>
+                            <entry><filename>models/DbTable</filename></entry>
+                        </row>
+                        <row>
+                            <entry><classname>Model_Mapper</classname></entry>
+                            <entry><filename>models/mappers</filename></entry>
+                        </row>
+                        <row>
+                            <entry><classname>Plugin</classname></entry>
+                            <entry><filename>plugins</filename></entry>
+                        </row>
+                        <row>
+                            <entry><classname>Service</classname></entry>
+                            <entry><filename>services</filename></entry>
+                        </row>
+                        <row>
+                            <entry><classname>View_Filter</classname></entry>
+                            <entry><filename>views/filters</filename></entry>
+                        </row>
+                        <row>
+                            <entry><classname>View_Helper</classname></entry>
+                            <entry><filename>views/helpers</filename></entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table></para>
+        <para>Protože budeme pro pojmenování používat název tabulky, <code>albums</code>, a protože
+            použijeme <classname>Zend_Db_Table</classname>, bude se naše třída jmenovat
+                <classname>Application_Model_DbTable_Albums</classname> a bude uložena v adresáři
+                <filename>applications/models/DbTable/Albums.php</filename></para>
+        <para>Aby <classname>Zend_Db_Table</classname> věděla, kterou tabulku má spravovat, musíme
+            nastavit protected atribut <varname>$_name</varname> na jméno tabulky.
+                <classname>Zend_Db_Table</classname> dále předpokládá, že tabulka má primární klíč
+                <code>id</code>, který je automaticky zvyšován na straně databáze. Jeho jméno může
+            být v případě potřeby také změněno.</para>
+        <para>Abychom si ušetřili práci, můžeme použít <command>zf</command> z příkazové řádky.
+            Zadáme následující příkaz:</para>
+        <programlisting><![CDATA[zf create db-table Albums albums]]></programlisting>
+        <para>Nástroj nám vytvoři soubor <filename>Albums.php</filename> ve složce
+                <filename>application/models/DbTable</filename>. V tomto souboru je třída
+            pojmenovaná <classname>Application_Model_DbTable_Albums</classname>, která obsahuje
+            nastavené jméno databázové tabulky, se kterou tato třída pracuje.</para>
+        <para>Potřebujeme přidat ještě nějakou funkcionalitu, takže upravíme
+                <filename>application/models/DbTable/Albums.php</filename> a přidáme metody
+                <code>getAlbum()</code>, <code>addAlbum()</code>, <code>updateAlbum()</code> a
+                <code>deleteAlbum()</code>, takže teď to vypadá takhle: </para>
+        <programlisting language="php"><![CDATA[<?php
+class Application_Model_DbTable_Albums extends Zend_Db_Table_Abstract
+{
+    protected $_name = 'albums';
+
+    public function getAlbum($id)
+    {
+        $id = (int)$id;
+        $row = $this->fetchRow('id = ' . $id);
+        if (!$row) {
+            throw new Exception("Could not find row $id");
+        }
+        return $row->toArray();
+    }
+
+    public function addAlbum($artist, $title)
+    {
+        $data = array(
+            'artist' => $artist,
+            'title' => $title,
+        );
+        $this->insert($data);
+    }
+
+    public function updateAlbum($id, $artist, $title)
+    {
+        $data = array(
+            'artist' => $artist,
+            'title' => $title,
+        );
+        $this->update($data, 'id = '. (int)$id);
+    }
+
+    public function deleteAlbum($id)
+    {
+        $this->delete('id =' . (int)$id);
+    }
+}]]></programlisting>
+        <para>Vytořili jsme čtyři pomocné metody, které naše aplikace použije jako rozhraní pro
+            přístup k databázi. <code>getAlbum()</code> načte jeden řádek jako pole,
+                <code>addAlbum()</code> vytvoří nový řádek v databázi, <code>updateAlbum()</code>
+            aktualizuje řádek alba v databázi a <code>deleteAlbum()</code> ho smaže. Kód každé z
+            těchto metod je samovysvětlující. I když to v tomto tutoriálu není potřeba, můžete také
+            říct <classname>Zend_Db_Table</classname> o souvisejících tabulkách a ta tak může
+            načítat data i z nich. Teď potřebujeme v kontrolech získat data z modelu a zobrazit je
+            pomocí view skriptů. Nicméně, nejdříve je potřeba pochopit, jak v Zend_Frameworku
+            funguje šablonovací systém.</para>
+    </section>
+    <section>
+        <title>Layout a views</title>
         <para>To be continued...</para>
     </section>
 </article>
