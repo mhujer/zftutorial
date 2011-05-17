@@ -675,7 +675,40 @@ class Application_Model_DbTable_Albums extends Zend_Db_Table_Abstract
             funguje šablonovací systém.</para>
     </section>
     <section>
-        <title>Layout a views</title>
-        <para>To be continued...</para>
+        <title>Layout a viewčka</title>
+        <para>View komponenta Zend Frameworku se podle očekávání jmenuje
+                <classname>Zend_View</classname>. Umožňuje nám oddělit kód pro zobrazení stránky od
+            aplikačního kódu.</para>
+        <para>Základní použití <classname>Zend_View</classname> je:</para>
+        <programlisting language="php"><![CDATA[$view = new Zend_View();
+$view->setScriptPath('/path/to/scripts');
+echo $view->render('script.php');]]></programlisting>
+        <para>Na první pohled je vidět, že je zbytečné opakovat takovýdle nudný kód v každé akci.
+            Raději si view zinicializujeme někde jinde a pak jen budeme již inicializovaný objekt
+            používat v jednitlivých akcích. Zend Framework obsahuje Action Helper
+                <classname>ViewRenderer</classname>. Ten za nás udělá inicializaci proměnné
+            $this->view v kontroleru a také nám po skončení akce vykreslí view skript</para>
+
+        <para><classname>ViewRenderer</classname> nastaví instanci <classname>Zend_View</classname>
+            tak, aby view skripty hledala ve složce
+                <filename>views/scripts/{jméno-kontroleru}</filename> a ve výchozím nastavení
+            vyrenderovala view skript, který se jmenuje stejně jako akce, ale s příponou .phtml.
+            Použije se tedy view script v souboru
+                <filename>views/scripts/{jméno-kontroleru}/{jméno-akce}.phtml</filename> a
+            vyrenderovaný výsledek se uloží do vlastnosti <varname>body</varname> objektu
+                <classname>Response</classname>. Objekt <classname>Response</classname> se používá
+            pro shromáždění všech HTTP hlaviček, obsahu a výjimek vygenerovaných z MVC. Front
+            kontroler pak na konci zpracování odešle hlavičky a obsah
+            <varname>body</varname>.</para>
+
+        <para>Tohle všechno je pro nás vygenerováno, pokud použijeme
+                <classname>Zend_Tool</classname> pro vytvoření projektu a pro přidávání kontrolerů a
+            akcí pomocí příkazů <command>zf create controller</command> a <command>zf create
+                action</command>.</para>
+
+        <section>
+            <title>Společný HTML kód: Layouty</title>
+            <para/>
+        </section>
     </section>
 </article>
