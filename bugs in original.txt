@@ -1,0 +1,4 @@
+p4: c\windows\system32\drivers\etc\hosts - missing :
+
+p10: Common HTML code: Layouts  -> layouts.phtml vs layout.phtml
+p10: bottom: "use PHP within it, <!-- comma --> There is a variable

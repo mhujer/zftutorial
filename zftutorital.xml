@@ -688,7 +688,6 @@ echo $view->render('script.php');]]></programlisting>
             používat v jednitlivých akcích. Zend Framework obsahuje Action Helper
                 <classname>ViewRenderer</classname>. Ten za nás udělá inicializaci proměnné
             $this->view v kontroleru a také nám po skončení akce vykreslí view skript</para>
-
         <para><classname>ViewRenderer</classname> nastaví instanci <classname>Zend_View</classname>
             tak, aby view skripty hledala ve složce
                 <filename>views/scripts/{jméno-kontroleru}</filename> a ve výchozím nastavení
@@ -700,7 +699,6 @@ echo $view->render('script.php');]]></programlisting>
             pro shromáždění všech HTTP hlaviček, obsahu a výjimek vygenerovaných z MVC. Front
             kontroler pak na konci zpracování odešle hlavičky a obsah
             <varname>body</varname>.</para>
-
         <para>Tohle všechno je pro nás vygenerováno, pokud použijeme
                 <classname>Zend_Tool</classname> pro vytvoření projektu a pro přidávání kontrolerů a
             akcí pomocí příkazů <command>zf create controller</command> a <command>zf create
@@ -708,7 +706,54 @@ echo $view->render('script.php');]]></programlisting>
 
         <section>
             <title>Společný HTML kód: Layouty</title>
-            <para/>
+            <para>Brzy uvidíme, že ve view budeme mít spoustu společného HTML kódu pro hlavičku,
+                patičku a sidebar(y). Vzhledem k tomu, že to je velmi častý problém, Zend Framework
+                obsahuje komponentu <classname>Zend_Layout</classname>, která ho řeší.
+                    <classname>Zend_Layout</classname> nám umožní přesunout hlavičku, patičku a
+                další společné části do skriptu pro layout, do kterého se potom vykreslí kód
+                konkrétního view skriptu pro danou akci.</para>
+            <para>Výchozí místo pro ukládání layoutů je <filename>application/layouts/</filename> a
+                existují také resource pro <classname>Zend_Application</classname>, který nám
+                    <classname>Zend_Layout</classname> nakonfiguruje. Pro vytvoření layout skriptu a
+                úpravu <filename>application.ini</filename> opět použijeme
+                    <classname>Zend_Tool</classname>. Z příkazováné řádky zadáme v adresáři
+                    <filename>zf-tutorial</filename>:</para>
+            <programlisting language="cmd"><![CDATA[zf enable layout]]></programlisting>
+            <para><classname>Zend_Tool</classname> vytvořil složku
+                    <filename>application/layouts/scripts</filename> a v ní vytvořil view skript
+                    <filename>layout.phtml</filename>. Také upravil
+                    <filename>application.ini</filename> a přidal <code>resources.layout.layoutPath
+                    = APPLICATION_PATH "/layouts/scripts/"</code> do sekce
+                <code>[production]</code>.</para>
+            <para>Na konci zpracování požadavku po skončení běhu jednotlivých akcí
+                    <classname>Zend_Layout</classname> vykreslí náš layout.
+                    <classname>Zend_Tool</classname> vytvoří základní layout, který jen zobrazí
+                obsah view skriptu dané akce. Doplníme do něj HTML kód protřebný pro náš web.
+                Otevřete <filename>zf-tutorial/application/layouts/scripts/layout.phtml</filename> a
+                nahraďte původní kód tímto:</para>
+            <programlisting language="php"><![CDATA[<?php
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle('Zend Framework Tutorial');
+echo $this->doctype(); ?>]]></programlisting>
+            <programlisting language="xml"><![CDATA[<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <?php echo $this->headMeta(); ?>
+    <?php echo $this->headTitle(); ?>
+</head>
+<body>
+<div id="content">
+    <h1><?php echo $this->escape($this->title); ?></h1>
+    <?php echo $this->layout()->content; ?>
+</div>
+</body>
+</html>]]></programlisting>
+            <para>Layout obsahuje vnější HTML kód, který je celkem běžný. A protože to je normální
+                PHP soubor, můžete v něm používat PHP. Je k dispozici proměnná
+                    <varname>$this</varname>, ve které je instance view, který byla vytvořena během
+                bootstrapování. Můžeme ji použít pro získání dat, která byla vložena do viewčka a
+                také z ní můžeme volat metody. Ty metody (říkáme jim view helpery) vrací string,
+                který potom můžeme vyechovat.</para>
         </section>
     </section>
 </article>
