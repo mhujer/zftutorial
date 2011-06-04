@@ -754,6 +754,94 @@ echo $this->doctype(); ?>]]></programlisting>
                 bootstrapování. Můžeme ji použít pro získání dat, která byla vložena do viewčka a
                 také z ní můžeme volat metody. Ty metody (říkáme jim view helpery) vrací string,
                 který potom můžeme vyechovat.</para>
+            <para>Na začátku stránky jsme si nastavili několik view helperů pro hlavičku a pak jsme
+                vypsali správný doctype a ty nastavené view helpery. V
+                    <code><![CDATA[<body>]]></code> jsme si vytvořili <code><![CDATA[<div>]]></code>
+                s titulkem v <code><![CDATA[<h1>]]></code>. View skript aktuální akce vypíšeme z
+                placeholderu pomocí view helperu <code>layout()</code>: <code>echo
+                    $this->layout()->content;</code>. To znamená, že view skripty akcí se renderují
+                dříve než view skript layoutu.</para>
+            <para>Dříve než vyrenderujeme jakýkoliv view skript, je nutné si nastavit doctype
+                stránky. View skripty akcí jsou rendrovány dříve a někdy potřebují vědět, který
+                doctype je použit. To je důležité například pro
+                <classname>Zend_Form</classname>.</para>
+            <para>Doctype nastavíme přidáním dalšího řádku do <filename>application.ini</filename>,
+                do sekce <code>[production]</code>:</para>
+            <programlisting language="ini">resources.view.doctype = "XHTML1_STRICT"</programlisting>
+            <para>View helper <code>doctype()</code> teď bude vypisovat správný doctype a komponenty
+                jako <classname>Zend_Form</classname> budou generovat odpovídající HTML.</para>
         </section>
+        <section>
+            <title>Stylování</title>
+            <para>I když je to <quote>jen</quote> tutotoriál, potřebujeme CSS soubor, aby naše
+                aplikace vypadala alespoň trochu reprezentativně! Není jasné, jak nalinkujeme CSS
+                soubor, protože URL neukazuje do správného kořenového adresáře. Naštestí existuje
+                view helper <code>baseUrl()</code>. Ten zpracuje adresu požadavku a vrátí nám
+                potřebný úsek URL.</para>
+            <para>Teď můžeme CSS přidat do <code>&lt;head&gt;</code> v souboru
+                    <filename>application/layouts/scripts/layout.phtml</filename>. Použijeme view
+                helper <code>headLink()</code>:</para>
+            <para><filename>zf-tutorial/application/layouts/scripts/layout.phtml</filename>:</para>
+            <programlisting language="php"><![CDATA[...
+<head>
+    <?php echo $this->headMeta(); ?>
+    <?php echo $this->headTitle(); ?>
+    <?php echo $this->headLink()
+        ->prependStylesheet($this->baseUrl().'/css/site.css'); ?>
+</head>
+...]]></programlisting>
+            <para>Díky tomu, že jsme použili metodu <code>prependStylesheet()</code>, můžeme později
+                přidat další, více specifické CSS soubory z view skriptů jednotlivých controllerů a
+                ty budou zařazeny až po <filename>site.css</filename>.</para>
+            <para>A nakonec přidme nějaké CSS. V <filename>public/</filename> si vytvoříme adresář
+                    <filename>css</filename> a soubor <filename>site.css</filename> s tímto
+                kódem:</para>
+            <para><filename>zf-tutorial/public/css/site.css</filename>:</para>
+            <programlisting language="css"><![CDATA[body,html {
+    margin: 0 5px;
+    font-family: Verdana,sans-serif;
+}
+h1 {
+    font-size: 1.4em;
+    color: #008000;
+}
+a {
+    color: #008000;
+}
+
+/* Table */
+th {
+    text-align: left;
+}
+td, th {
+    padding-right: 5px;
+}
+
+/* style form */
+form dt {
+    width: 100px;
+    display: block;
+    float: left;
+    clear: left;
+}
+form dd {
+    margin-left: 0;
+    float: left;
+}
+form #submitbutton {
+    margin-left: 100px;
+}]]></programlisting>
+            <para>Teď už to vypadá trochu lépe, ale jak vidíte, přece jenom nejsem grafik!</para>
+            <para>Teď můžeme vyprázdnit všechny čtyři automaticky vygenerované view skripty, abychom
+                je mohli pak naplnit. Takže vzhůru do toho, vyprázdněte soubory
+                    <filename>index.phtml</filename>, <filename>add.phtml</filename>,
+                    <filename>edit.phtml</filename> and <filename>delete.phtml</filename>, které jak
+                si jistě pamatujete, jsou v adresáři
+                    <filename>application/views/scripts/index</filename>.</para>
+        </section>
+    </section>
+    <section>
+        <title>Vypisování alb</title>
+        <para>...</para>
     </section>
 </article>
