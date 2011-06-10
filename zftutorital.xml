@@ -842,6 +842,71 @@ form #submitbutton {
     </section>
     <section>
         <title>Vypisování alb</title>
+        <para>Teď když už máme připravené nastavení, databázi a kostry view skriptů, můžeme pokročit
+            hlouběji a zobrazit nějaká alba. Použijeme na to <classname>IndexController</classname>
+            a alba z databáze vypíšeme v <function>indexAction()</function>.</para>
+        <para><filename>zf-tutorial/application/controllers/IndexController.php</filename>:</para>
+        <programlisting language="php"><![CDATA[...
+    function indexAction()
+    {
+        $albums = new Application_Model_DbTable_Albums();
+        $this->view->albums = $albums->fetchAll();
+    }
+...]]></programlisting>
+        <para>Nejprve vytvoříme instanci modelu (založeného na návrhovém vzoru table data gateway).
+            Metoda <methodname>fetchAll()</methodname> vrací instanci
+                <classname>Zend_Db_Table_Rowset</classname>, která nám ve view skriptu umožní
+            iterovat přes vrácené řádky</para>
+        <para>Teď můžeme naplnit příslušn view skript, <filename>index.phtml</filename>:</para>
+        <para><filename>zf-tutorial/application/views/scripts/index/index.phtml</filename></para>
+        <programlisting language="php"><![CDATA[<?php
+$this->title = "My Albums";
+$this->headTitle($this->title);
+?>
+<p><a href="<?php echo $this->url(array('controller'=>'index',
+        'action'=>'add'));?>">Add new album</a></p>
+<table>
+<tr>
+    <th>Title</th>
+    <th>Artist</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach($this->albums as $album) : ?>
+<tr>
+    <td><?php echo $this->escape($album->title);?></td>
+    <td><?php echo $this->escape($album->artist);?></td>
+    <td>
+        <a href="<?php echo $this->url(array('controller'=>'index',
+            'action'=>'edit', 'id'=>$album->id));?>">Edit</a>
+        <a href="<?php echo $this->url(array('controller'=>'index',
+            'action'=>'delete', 'id'=>$album->id));?>">Delete</a>
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>]]></programlisting>
+        <para>První věc, ktero uděláme je nastavení titulku stránky (pro layout) a také nastavení
+            titulku pro <code>&lt;head&gt;</code> pomocí view helperu <code>headTitle()</code> (ten
+            se zobrazí v titulku v prohlížeči). Pak vytvoříme odkaz na přidání nového alba. View
+            helper <classname>url()</classname> je součástí frameworku a umožní nám snadno vytvářet
+            odkazy včetně správní základní URL. Jednoduše mu předáme pole parametrů a on vyřeší
+            zbytek.</para>
+        <para>Dále vytvoříme html tabulku s řádky pro jednotlivá alba. Do nich vypíšeme titulek,
+            intepreta a odkazy na editaci a smázání záznamu. Alba procházíme pomocí
+                <code>foreach:</code>. Použijeme alternativní zápis pomocí dvojtečky a
+                <code>endforeach;</code> - kód je čitelnější než když musíte hledat související
+            závorky. Na vytvoření odkazů na editaci a smazání jsme opět použili view helper
+                <code>url()</code>.</para>
+        <para>Pokud otevřete <link xlink:href="http://localhost/zf-tutorial/public/"
+                >http://localhost/zf-tutorial/public/</link> tak by jste měli vidět krásný seznam
+                alb, něco jako tohle:</para>
+        <para><inlinemediaobject>
+            <imageobject>
+                <imagedata fileref="img/albums-list.png"/>
+            </imageobject>
+        </inlinemediaobject></para>
+    </section>
+    <section>
+        <title>Přidání nového alba</title>
         <para>...</para>
     </section>
 </article>
