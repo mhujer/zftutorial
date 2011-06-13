@@ -898,15 +898,143 @@ $this->headTitle($this->title);
                 <code>url()</code>.</para>
         <para>Pokud otevřete <link xlink:href="http://localhost/zf-tutorial/public/"
                 >http://localhost/zf-tutorial/public/</link> tak by jste měli vidět krásný seznam
-                alb, něco jako tohle:</para>
+            alb, něco jako tohle:</para>
         <para><inlinemediaobject>
-            <imageobject>
-                <imagedata fileref="img/albums-list.png"/>
-            </imageobject>
-        </inlinemediaobject></para>
+                <imageobject>
+                    <imagedata fileref="img/albums-list.png"/>
+                </imageobject>
+            </inlinemediaobject></para>
     </section>
     <section>
         <title>Přidání nového alba</title>
+        <para>Ted můžeme napsat funkcionalitu na přidání nového alba. Skladá se ze dvou
+            částí:</para>
+        <para>
+            <itemizedlist>
+                <listitem>
+                    <para>Zobrazení formuláře pro zadání informací</para>
+                </listitem>
+                <listitem>
+                    <para>Zpracování zadaných dat a uložení do databáze</para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>Použijeme na to <classname>Zend_Form</classname>. Ten nám usnadní vytváření formuláře
+            a validaci zadaných dat. Formulář uložíme do třídy <classname>Form_Album</classname>,
+            která dědí od <classname>Zend_Form</classname>. Třídu uložíme do souboru
+                <filename>Album.php</filename> do adresáře <filename>forms</filename>. Začneme
+            použitím nástroje <command>zf</command>: </para>
+        <para><code>zf create form Album</code></para>
+        <para>Tím vytvoříme soubor <filename>Album.php</filename> v adresáři
+                <filename>application/forms</filename>. Vygenerovaný soubor obsahuje třídu s metodou
+                <methodname>init()</methodname>. Otevřeme soubor
+                <filename>application/forms/Album.php</filename> a metodu upravíme takto: </para>
+        <para><filename>zf-tutorial/application/forms/Album.php</filename>:</para>
+        <programlisting language="php"><![CDATA[<?php
+class Application_Form_Album extends Zend_Form
+{
+    public function init()
+    {
+        $this->setName('album');
+        $id = new Zend_Form_Element_Hidden('id');
+        $id->addFilter('Int');
+        $artist = new Zend_Form_Element_Text('artist');
+        $artist->setLabel('Artist')
+               ->setRequired(true)
+               ->addFilter('StripTags')
+               ->addFilter('StringTrim')
+               ->addValidator('NotEmpty');
+        $title = new Zend_Form_Element_Text('title');
+        $title->setLabel('Title')
+              ->setRequired(true)
+              ->addFilter('StripTags')
+              ->addFilter('StringTrim')
+              ->addValidator('NotEmpty');
+        $submit = new Zend_Form_Element_Submit('submit');
+        $submit->setAttrib('id', 'submitbutton');
+        $this->addElements(array($id, $artist, $title, $submit));
+    }
+}]]></programlisting>
+        <para>V metodě <methodname>init()</methodname> vytvoříme čtyři elementy - id, artist, title,
+            a tlačítko submit. Každému nastavíme nějaké atributy, například popisek (label), který
+            bude u políčka vypsán. U id si cheme být jisti, že to je pouze číslo, abychom předešli
+            potenciálnímu SQL injection. To řeší filter <classname>Int</classname>.</para>
+        <para>Textovým elementům přidáme filtry - <classname>StripTags</classname> a
+                <classname>StringTrim</classname> - tím odebereme HTML a nepotřebné bílé znaky. Také
+            je nastavíme jako povinné (<code>required</code>) a přidáme
+                <classname>NotEmpty</classname> validátor, abychom ověřili, že uživatel vyplnil
+            potřebné informace. (<classname>NotEmpty</classname> validátor tu není nutný, protože
+            bude automaticky přidán díky <code>setRequired(true);</code>; slouží tu tedy jen jako
+            ukázka, jak přidat validátor.)</para>
+        <para>Teď potřebujeme formulář zobrazit a poté zpracovat odeslaná data. Vyřešíme to v
+                <methodname>addAction()</methodname> metodě v
+            <classname>IndexController</classname>:</para>
+        <para><filename>zf-tutorial/application/controllers/IndexController.php</filename>:</para>
+        <programlisting language="php"><![CDATA[...
+    function addAction()
+    {
+        $form = new Application_Form_Album();
+
+        $form->submit->setLabel('Add');
+        $this->view->form = $form;
+
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+            if ($form->isValid($formData)) {
+                $artist = $form->getValue('artist');
+                $title = $form->getValue('title');
+                $albums = new Application_Model_DbTable_Albums();
+                $albums->addAlbum($artist, $title);
+
+                $this->_helper->redirector('index');
+            } else {
+                $form->populate($formData);
+            }
+        }
+    }
+    ...]]></programlisting>
+        <para>Projděme to teď podrobněji:</para>
+        <programlisting language="php"><![CDATA[    $form = new Application_Form_Album();
+    $form->submit->setLabel('Add');
+    $this->view->form = $form;]]></programlisting>
+        <para>Vytvoříme instanci našeho <classname>Form_Album</classname>, nastavíme popisek
+            odesílacího tlačítka na <quote>Add</quote> a nakonec formulář vložíme do view.</para>
+        <programlisting language="php"><![CDATA[    if ($this->getRequest()->isPost()) {
+        $formData = $this->getRequest()->getPost();
+        if ($form->isValid($formData)) {]]></programlisting>
+        <para>Pokud metoda <methodname>isPost()</methodname> na objektu requestu vrací
+                <code>true</code>, tak byl formulář odeslán, takže pomocí
+                <methodname>getPost()</methodname> získáme data a pomocí
+                <methodname>isValid()</methodname> ověříme, že jsou správná.</para>
+        <programlisting language="php"><![CDATA[            $artist = $form->getValue('artist');
+            $title = $form->getValue('title');
+            $albums = new Application_Model_DbTable_Albums();
+            $albums->addAlbum($artist, $title);]]></programlisting>
+        <para>Pokud je formulář validní,pak vytvoříme instanci modelu
+                <classname>Application_Model_DbTable_Albums</classname> a pomocí dříve vytvořené
+            metody <methodname>addAlbum()</methodname> vložíme nový záznam do databáze.</para>
+        <programlisting language="php"><![CDATA[$this->_helper->redirector('index');]]></programlisting>
+        <para>Po uložení alba přesměrujeme pomocí <classname>Redirector</classname> action helperu
+            na action <code>index</code> (tedy přejdeme zpět na homepage).</para>
+        <programlisting language="php"><![CDATA[        } else {
+            $form->populate($formData);
+        }]]></programlisting>
+        <para>Pokud zadaná data nejsou validní, pak jimi naplníme formulář a znovu h
+            zobrazíme.</para>
+        <para>Teď ještě musíme zařídit vykreslení formuláře ve view skriptu
+                <filename>add.phtml</filename>:</para>
+        <para><filename>zf-tutorial/application/views/scripts/index/add.phtml</filename>:</para>
+        <programlisting language="php"><![CDATA[<?php
+$this->title = "Add new album";
+
+$this->headTitle($this->title);
+echo $this->form ;
+?>]]></programlisting>
+        <para>Jak vidíte, vykreslení formuláře je jednoduché - jen ho vyechujeme. Formulář totiž ví,
+            jak se má vykreslit. Teď si můžete vyzkoušet přidání alba pomocí odkazu <quote>Add new
+                album</quote> na homepage.</para>
+    </section>
+    <section>
         <para>...</para>
     </section>
 </article>
