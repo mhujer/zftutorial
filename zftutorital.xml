@@ -1035,6 +1035,69 @@ echo $this->form ;
                 album</quote> na homepage.</para>
     </section>
     <section>
+        <title>Editace alba</title>
+        <para>Editace alba je skoro stejná jako přidávání nového, takže kód je velmi podobný:</para>
+        <para><filename>zf-tutorial/application/controllers/IndexController.php</filename></para>
+        <programlisting language="php"><![CDATA[    ...
+    function editAction()
+    {
+        $form = new Application_Form_Album();
+        $form->submit->setLabel('Save');
+        $this->view->form = $form;
+
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+            if ($form->isValid($formData)) {
+                $id = (int)$form->getValue('id');
+                $artist = $form->getValue('artist');
+                $title = $form->getValue('title');
+                $albums = new Application_Model_DbTable_Albums();
+                $albums->updateAlbum($id, $artist, $title);
+
+                $this->_helper->redirector('index');
+            } else {
+                $form->populate($formData);
+            }
+        } else {
+            $id = $this->_getParam('id', 0);
+            if ($id > 0) {
+                $albums = new Application_Model_DbTable_Albums();
+                $form->populate($albums->getAlbum($id));
+            }
+        }
+    }
+    ...]]></programlisting>
+        <para>Podíváme se na rozdíly oproti přidávání alba. Nejdříve, při zobrazení fomuláře
+            uživateli potřebujeme získat intepreta a titulek alba a naplnit s nimi formulářová pole.
+            To se děje na konci metody: </para>
+        <programlisting language="php"><![CDATA[            $id = $this->_getParam('id', 0);
+            if ($id > 0) {
+                $albums = new Application_Model_DbTable_Albums();
+                $form->populate($albums->getAlbum($id));
+            }]]></programlisting>
+        <para>Poznamenejme, že toto se provede, když požadavek není odeslán POSTem, protože POST
+            znamená, že formulář byl vyplněn a máme ho zpracovat. Pro první zobrazení formuláře
+            získáme id z požadavku pomocí metody <methodname>_getParam()</methodname>. Potom z
+            modelu získáme záznam s albem a daty naplníme formulář. (Teď už víte, proč metoda
+                <methodname>getAlbum()</methodname> vrací pole!)</para>
+        <para>Po zvalidování formuláře potřebujeme uložit data zpět do správného řádku v databázi.
+            To uděláme pomocí metody modelu <methodname>updateAlbum()</methodname>:</para>
+        <programlisting language="php"><![CDATA[                $id = $form->getValue('id');
+                $artist = $form->getValue('artist');
+                $title = $form->getValue('title');
+                $albums = new Application_Model_DbTable_Album
+                $albums->updateAlbum($id, $artist, $title);]]></programlisting>
+        <para>Šablona view skriptu je obdobná jako add.phtml:</para>
+        <para><filename>zf-tutorial/application/views/scripts/index/edit.phtml</filename>:</para>
+        <programlisting language="php"><![CDATA[<?php
+$this->title = "Edit album";
+$this->headTitle($this->title);
+echo $this->form ;
+?>]]></programlisting>
+        <para>Teď už by jde alba i editovat.</para>
+    </section>
+    <section>
+        <title>Mazání alb</title>
         <para>...</para>
     </section>
 </article>
