@@ -1098,6 +1098,67 @@ echo $this->form ;
     </section>
     <section>
         <title>Mazání alb</title>
+        <para>Aby naše aplikace byla kompletní musíme ještě přidat mazání. Vzhledem k tomu, že u
+            každého alba máme odkaz na smazání, tak by se na první pohled zdálo, že album smažeme po
+            kliknutí na odkaz. Jenže to je špatně. Připomeňme si principy HTTP protokolu - nevratné
+            akce by neměly být přístupné přes GET, ale přes POST.</para>
+        <para>Při kliknutí na delete zobrazíme potvrzovací fomulář, kde když uživatel vybere
+                <quote>yes</quote>, tak záznam smažeme. Vzhledem k tomu, že formulář je primitivní,
+            vložíme jeho kód přímo do viewčka (<classname>Zend_Form</classname> je možnost, ne
+            povinnost!).</para>
+        <para>Začněme s kódem akce v
+            <methodname>IndexController::deleteAction()</methodname>:</para>
+        <para><filename>zf-tutorial/application/controllers/IndexController.php</filename>:</para>
+        <programlisting language="php"><![CDATA[    ...
+    public function deleteAction()
+    {
+        if ($this->getRequest()->isPost()) {
+            $del = $this->getRequest()->getPost('del');
+            if ($del == 'Yes') {
+                $id = $this->getRequest()->getPost('id');
+                $albums = new Application_Model_DbTable_Albums();
+                $albums->deleteAlbum($id);
+            }
+            $this->_helper->redirector('index');
+        } else {
+            $id = $this->_getParam('id', 0);
+            $albums = new Application_Model_DbTable_Albums();
+            $this->view->album = $albums->getAlbum($id);
+        }
+    }
+    ...]]></programlisting>
+        <para>Stejně jako při přidávání nebo editaci použijeme, ke zjištění zda máme zobrazit
+            potvrzovací formulář nebo provést mazání, metodu požadavku
+                <methodname>isPost()</methodname>. Pro vlastní smazání použijeme metodu
+                <methodname>deleteAlbum()</methodname> z
+                <classname>Application_Model_DbTable_Albums</classname>. Když požadavek nebude volán
+            pomocí POSTu, tak podle parametru id získáme záznam z databáze a ten vložíme do view
+            skriptu.</para>
+        <para>View skript je jednoduchý formulář:</para>
+        <para><filename>zf-tutorial/application/views/scripts/index/delete.phtml</filename></para>
+        <programlisting language="php"><![CDATA[<?php
+$this->title = "Delete album";
+$this->headTitle($this->title);
+
+?>
+<p>Are you sure that you want to delete
+  '<?php echo $this->escape($this->album['title']); ?>' by
+  '<?php echo $this->escape($this->album['artist']); ?>'?
+</p>
+<form action="<?php echo $this->url(array('action'=>'delete')); ?>"
+    method="post">
+<div>
+  <input type="hidden" name="id" value="<?php echo $this->album['id']; ?>" />
+  <input type="submit" name="del" value="Yes" />
+  <input type="submit" name="del" value="No" />
+</div>
+</form>]]></programlisting>
+        <para>Uživateli zobrazíme potvrzovací hlášku a formulář s tlačítky yes a no. V akci pak
+            hledáme přímo hodnotu <quote>Yes</quote>. </para>
+        <para>Tak a je to - teď už máte hotovou celou fungující aplikaci.</para>
+    </section>
+    <section>
+        <title>Závěr</title>
         <para>...</para>
     </section>
 </article>
