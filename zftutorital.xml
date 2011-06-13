@@ -1159,6 +1159,18 @@ $this->headTitle($this->title);
     </section>
     <section>
         <title>Závěr</title>
-        <para>...</para>
+        <para>Tímto jsme skončili náš krátký pohled na tvorbu jednoduché, ale plně funkční, MVC
+            aplikace s použitím Zend Frameworku. Doufám, že se vám líbil. Pokud najdete cokoliv
+            špatně, prosím napište mi na <email>rob@akrabat.com</email></para>
+        <para>Tento tutoriál se zabýval jen základy použití frameworku. Framework obsahuje mnohem
+            více komponent k prozkoumání! Vynechal jsem také dost vysvětlování. Na mém webu <link
+                xlink:href="http://akrabat.com">http://akrabat.com</link> najdete další články o
+            Zend Frameworku. A také by jste si měli přečíst manuál na <link
+                xlink:href="http://framework.zend.com/manual"
+                >http://framework.zend.com/manual</link>.</para>
+        <para>A konečně, pokud máte raději informace papírově, tak jsem napsal knihu <emphasis>Zend
+                Framework in Action</emphasis>. Další informace jsou k dispozici na na <link
+                xlink:href="http://www.zendframeworkinaction.com"
+                >http://www.zendframeworkinaction.com</link>. Mrkněte na to :)</para>
     </section>
 </article>
