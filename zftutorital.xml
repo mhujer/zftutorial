@@ -2,8 +2,9 @@
 <?oxygen RNGSchema="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" type="xml"?>
 <article xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
     version="5.0" xml:lang="cs">
+
     <info>
-        <title>Začínáme se Zend Frameworkem 1.10</title>
+        <title>Začínáme se Zend Frameworkem</title>
         <author>
             <personname>Rob Allen (autor)</personname>
         </author>
@@ -259,24 +260,22 @@
                 <filename>public/</filename> je adresář přístupný z webu, takže URL naší aplikace
             bude <uri>http://localhost/zf-tutorial/public/</uri>. Díky tomu není většina aplikace
             přístupná z webu a je tudíž bezpečnější.</para>
-        <note>
-            <para>Poznámka: Na živém serveru by jste vytvořili virtual host a nastavili document
-                root přímo do adresáře <filename>public</filename>. Například pokud by jste
-                vytvářeli virtual host pojmenovaný <code>zf-tutorial.localhost</code>, tak by to
-                vypadalo nějak takto:</para>
-            <para><programlisting language="apache"><![CDATA[<VirtualHost *:80>
+        <para><emphasis role="bold">Poznámka:</emphasis> Na živém serveru by jste vytvořili virtual host a nastavili document root
+            přímo do adresáře <filename>public</filename>. Například pokud by jste vytvářeli virtual
+            host pojmenovaný <code>zf-tutorial.localhost</code>, tak by to vypadalo nějak
+            takto:</para>
+        <programlisting language="apache"><![CDATA[<VirtualHost *:80>
     ServerName zf-tutorial.localhost
     DocumentRoot /var/www/html/zf-tutorial/public
     <Directory "/var/www/html/zf-tutorial/public">
         AllowOverride All
     </Directory>
-</VirtualHost>]]></programlisting></para>
-            <para>Web potom bude přístupný přes <uri> http://zf-tutorial.localhost/</uri>. Ujistěte
-                se, že jste v souboru <filename>/etc/hosts</filename> nebo
-                    <filename>c:\windows\system32\drivers\etc\hosts</filename> nasměrovali
-                    <uri>zf-tutorial.localhost</uri> na 127.0.0.1. V tomto tutoriálu to tak dělat
-                nebudeme, pro testování použijeme jen podadresář.</para>
-        </note>
+</VirtualHost>]]></programlisting>
+        <para>Web potom bude přístupný přes <uri> http://zf-tutorial.localhost/</uri>. Ujistěte se,
+            že jste v souboru <filename>/etc/hosts</filename> nebo
+                <filename>c:\windows\system32\drivers\etc\hosts</filename> nasměrovali
+                <uri>zf-tutorial.localhost</uri> na 127.0.0.1. V tomto tutoriálu to tak dělat
+            nebudeme, pro testování použijeme jen podadresář.</para>
         <para>Obrázky, JavaScript a CSS soubory jsou uloženy v samostatných podadresářích v adresáři
                 <filename>public/</filename>. Stažený Zend Framework umístíme do adresáře
                 <filename>library/</filename>. Pokud budeme potřebovat další knihovny, tak ty patří
@@ -1136,7 +1135,7 @@ echo $this->form ;
             skriptu.</para>
         <para>View skript je jednoduchý formulář:</para>
         <para><filename>zf-tutorial/application/views/scripts/index/delete.phtml</filename></para>
-        <programlisting language="php"><![CDATA[<?php
+        <programlisting language="html"><![CDATA[<?php
 $this->title = "Delete album";
 $this->headTitle($this->title);
 

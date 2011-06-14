@@ -8,3 +8,10 @@ I'm learning both GIT and Docbook on this.
 
 Martin Hujer
 <mhujer@gmail.com>
+
+
+
+Build:
+# Generate PDF from Oxygen
+# Generate zftutorial.texy from Oxygen by db2html-texy.xsl
+# run php texy2html.php
