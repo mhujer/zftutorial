@@ -23,7 +23,7 @@
     <para>
         <emphasis role="bold">Poznámka: Tento tutoriál byl testován na Zend Frameworku od verze
             1.10.1 do 1.11.4. Je velká šance, že bude fungovat s následujícími verzemi řady 1.x, ale
-            nebude fungovat s verzemi předcházejícími 1.10.1.</emphasis>
+            určitě nebude fungovat s verzemi předcházejícími 1.10.1.</emphasis>
     </para>
     <section>
         <title>Požadavky</title>
@@ -61,7 +61,7 @@
     </section>
     <section>
         <title>Nastavení Zend_Tool</title>
-        <para> Zend Framework je dodávan s nástrojem pro příkazovou řádku. Začneme tedy jeho
+        <para> Zend Framework je dodávan s nástrojem pro příkazovou řádku. Začneme jeho
             nastavením.</para>
         <section>
             <title>Zend_Tool na Windows</title>
@@ -86,10 +86,10 @@
                         <para>
                             <itemizedlist>
                                 <listitem>
-                                    <para>Ovládací panely -> Systém</para>
+                                    <para>Ovládací panely → Systém</para>
                                 </listitem>
                                 <listitem>
-                                    <para>Upřesnit nastavení systému -> karta Upřesnit -> Proměnné
+                                    <para>Upřesnit nastavení systému → karta Upřesnit → Proměnné
                                         prostředí</para>
                                 </listitem>
                                 <listitem>
@@ -121,14 +121,14 @@
                     </listitem>
                     <listitem>
                         <para>Zkopírujte do <filename>/usr/local/ZendFrameworkCli</filename> -
-                            otevřete Terminal a napište:</para>
+                            otevřte Terminal a napište:</para>
                         <para>
                             <code>sudo cp -r ~/Downloads/ZendFramework-1.10.6-minimal
                                 /usr/local/ZendFrameworkCli</code>
                         </para>
                     </listitem>
                     <listitem>
-                        <para>Přidejte si alias do svého bash profilu: <itemizedlist>
+                        <para>Přidejte si alias do svého bash profilu:<itemizedlist>
                                 <listitem>
                                     <para>Do Terminalu zadejte <code>open
                                         ~/.bash_profile</code></para>
@@ -352,7 +352,7 @@
                 <code>News</code> a akce <code>view</code>. To umožňuje seskupování souvisejících
             akcí. Například kontroler <code>News</code> může mít akce <code>list</code>,
                 <code>archived</code>, <code>view</code>. MVC systém Zend Frameworku podporuje také
-            moduly, které slouží k seskupování kontrolerů. Tato aplikace nebude tak veliká, abychom
+            moduly, které slouží k seskupování kontrolerů. Tato aplikace nebude tak velká, abychom
             se jimi museli zabývat.</para>
         <para>V základním nastavení si Zend Framework rezervuje akci <code>index</code> jako
             výchozí. To je pro případy jako je <uri>http://localhost/zf-tutorial/public/news/</uri>,
@@ -417,7 +417,7 @@
             funkce ve třídě kontroleru a musí být pojmenována <code>{jméno akce}Action</code>. V
             tomto případě začíná <code>{jméno akce}</code> malým písmenem a i zbytek musí být malými
             písmeny. Názvy kontrolerů a akcí se střídajícími se velkými a malými písmeny jsou
-            povoleny, ale mají svoje pravidla, které je potřeba pochopit dříve, než je začnete
+            povoleny, ale mají svá pravidla, které je potřeba pochopit dříve, než je začnete
             používat. Podívejte se do dokumentace!</para>
         <para>Třída našeho kontroleru <code>IndexController</code> je uložena v souboru
                 <filename>application/controllers/ IndexController.php</filename>, který nám
@@ -475,8 +475,8 @@ zf create action delete Index</programlisting>
         <warning>
             <para>Pokud uvidíme Chybu 404, tak buď nemáte v Apachi povolený modul
                     <code>mod_rewrite</code> nebo mátě špatně nastavený <code>AllowOverride</code> v
-                konfiguraci Apache a proto se nezpracová soubor <filename>.htaccess</filename> ve
-                složce <filename>public/</filename>.</para>
+                konfiguraci Apache a proto se nezpracová soubor <filename>.htaccess</filename> ze
+                složky <filename>public/</filename>.</para>
         </warning>
     </section>
     <section>
@@ -670,7 +670,7 @@ class Application_Model_DbTable_Albums extends Zend_Db_Table_Abstract
             aktualizuje řádek alba v databázi a <code>deleteAlbum()</code> ho smaže. Kód každé z
             těchto metod je samovysvětlující. I když to v tomto tutoriálu není potřeba, můžete také
             říct <classname>Zend_Db_Table</classname> o souvisejících tabulkách a ta tak může
-            načítat data i z nich. Teď potřebujeme v kontrolech získat data z modelu a zobrazit je
+            načítat data i z nich. Teď potřebujeme v kontroleru získat data z modelu a zobrazit je
             pomocí view skriptů. Nicméně, nejdříve je potřeba pochopit, jak v Zend_Frameworku
             funguje šablonovací systém.</para>
     </section>
@@ -962,7 +962,7 @@ class Application_Form_Album extends Zend_Form
 }]]></programlisting>
         <para>V metodě <methodname>init()</methodname> vytvoříme čtyři elementy - id, artist, title
             a tlačítko submit. Každému nastavíme nějaké atributy, například popisek (label), který
-            bude u políčka vypsán. U id si cheme být jisti, že to je pouze číslo, abychom předešli
+            bude u políčka vypsán. U id si chceme být jisti, že to je pouze číslo, abychom předešli
             potenciálnímu SQL injection. To řeší filter <classname>Int</classname>.</para>
         <para>Textovým elementům přidáme filtry - <classname>StripTags</classname> a
                 <classname>StringTrim</classname> - těmi odebereme HTML tagy a nepotřebné bílé
