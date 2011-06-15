@@ -1,7 +1,8 @@
+p2: xxamp -> xampp
 p4: c\windows\system32\drivers\etc\hosts - missing :
-
 p10: Common HTML code: Layouts  -> layouts.phtml vs layout.phtml
 p10: bottom: "use PHP within it, <!-- comma --> There is a variable
 p12:  "My Albums" ->  'My Albums'
 p15: Is the ->populate() necessary? I think it is done by isValid()
 p15: $albums->addAlbum($artist, $title); -> ");" are brown instead of black
+p15: "We instantiate our Form_Album" -> classname is "Application_Form_Album"

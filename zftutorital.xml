@@ -46,7 +46,7 @@
                 <filename>.htaccess</filename>. To se obvykle dělá pomocí změny:
             <programlisting language="apache"><![CDATA[AllowOverride None]]></programlisting> na
             <programlisting language="apache"><![CDATA[AllowOverride All]]></programlisting> v
-            souboru <filename>httpd.conf</filename>. Podrobnější informace zjistíte v dokumentaci k
+            souboru <filename>httpd.conf</filename>. Podrobnější informace najdete v dokumentaci k
             Apache. Pokud nebude mít správně nastavený <code>mod_rewrite</code> a
                 <filename>.htaccess</filename>, tak nebude moci otevřít jinou stránku než homepage.
         </para>
@@ -55,19 +55,20 @@
         <title>Získání frameworku</title>
         <para>Zend Framework je k dispozici ke stažení na adrese <link
                 xlink:href=" http://framework.zend.com/download/latest"
-                >http://framework.zend.com/download/latest</link> buď v .zip nebo .tar.gz formátu.
-            Na konci stránky naleznete přímé odkazy. Verze "Minimal" je to, co potřebujete. </para>
+                >http://framework.zend.com/download/latest</link> buď ve formátu .zip nebo .tar.gz.
+            Na konci stránky naleznete přímé odkazy. Verze <quote>Minimal</quote> je to, co
+            potřebujete.</para>
     </section>
     <section>
         <title>Nastavení Zend_Tool</title>
         <para> Zend Framework je dodávan s nástrojem pro příkazovou řádku. Začneme tedy jeho
-            nastavením. </para>
+            nastavením.</para>
         <section>
             <title>Zend_Tool na Windows</title>
             <para>
                 <itemizedlist>
                     <listitem>
-                        <para>Vytvořte nový adresář v <code>Program Files</code> pojmenovaný
+                        <para>Vytvořte v <code>Program Files</code> nový adresář pojmenovaný
                                 <filename>ZendFrameworkCli</filename></para>
                     </listitem>
                     <listitem>
@@ -92,8 +93,8 @@
                                         prostředí</para>
                                 </listitem>
                                 <listitem>
-                                    <para>V části "Systémové proměnné" najděte <code>Path</code> a
-                                        poklikejte na ni</para>
+                                    <para>V části <quote>Systémové proměnné</quote> najděte
+                                            <code>Path</code> a poklikejte na ni</para>
                                 </listitem>
                                 <listitem>
                                     <para>Přidejte <code>;C:\Program
@@ -150,13 +151,14 @@
         </section>
         <section>
             <title>Otestování Zend_Tool</title>
-            <para>To, že jste Zend_Tool správně nainstalovali ověříte tak, že otevřete příkazovou
+            <para>To, že jste Zend_Tool nainstalovali správně ověříte tak, že otevřete příkazovou
                 řádku a zadáte: <programlisting><![CDATA[zf show version]]></programlisting></para>
             <para>Pokud je vše v pořádku, uvidíte:
                 <programlisting><![CDATA[Zend Framework Version: 1.10.0]]></programlisting></para>
             <para>Pokud ne, ověřte, zda jste správně nastavili cestu a že adresář
-                    <filename>bin</filename> v <filename>ZendFrameworkCli</filename>
-                existuje.</para>
+                    <filename>bin</filename> v <filename>ZendFrameworkCli</filename> existuje. Až
+                vám bude <code>zf</code> fungovat, pomocí <command>zf --help</command> si můžete
+                vypsat dostupné příkazy</para>
             <para>
                 <emphasis role="bold">Pokud je vaše distribuce PHP dodávána se Zend Frameworkem,
                     ověřte, zda nepoužívá verzi ZF 1.9, jinak vám tento tutoriál nebude
@@ -165,7 +167,7 @@
         </section>
     </section>
     <section>
-        <title>Vlastní aplikace</title>
+        <title>Ukázková aplikace</title>
         <para>Teď už je vše připraveno a můžeme se pustit do vytváření Zend Frameworkové aplikace.
             Nejprve se podíváme, co vlastně budeme dělat. Vytvoříme jednoduchý systém pro evidenci
             našich CDček. Hlavní stránka nám umožní přidat, upravovat a mazat CDčka. Při vývoji
@@ -178,8 +180,8 @@
                     <tbody>
                         <row>
                             <entry>Domovská stránka</entry>
-                            <entry>Ta zobrazí seznam alb a odkazy na jejich editaci a smazání. Bude
-                                tam také odkaz na přidání nového alba.</entry>
+                            <entry>Zobrazí seznam alb a odkazy na jejich editaci a smazání. Bude tam
+                                také odkaz na přidání nového alba.</entry>
                         </row>
                         <row>
                             <entry>Přidat nové album</entry>
@@ -243,10 +245,10 @@
                 <filename>zf</filename>. První úkol je vytvoření kostry souborů a adresářů.</para>
         <para>Otevřte Terminal nebo příkazovou řádku a přepněte se do kořenového adresáře webového
             serveru. Například pro xampp to bude <filename>C:/xampp/htdocs/</filename>. Ujistěte se,
-            že tam máte oprávnění pro zápis a webovým server může číst. Zadejte:</para>
+            že tam máte oprávnění pro zápis a webový server může číst. Zadejte:</para>
         <para><code>zf create project zf-tutorial</code></para>
         <para>ZF vytvoří adresář <filename>zf-tutorial</filename> a v něm doporučenou strukturu. Ta
-            předpokládá, že máte úplnou kontrolu nad nastavením Apache a proto umístí většinu
+            předpokládá, že máte úplnou kontrolu nad nastavením Apache a můžete umístit většinu
             souborů mimo root webu. Měli by jste vidět tyto soubory a adresáře:</para>
         <para><inlinemediaobject>
                 <imageobject>
@@ -256,14 +258,14 @@
         <para>V adresáři <filename>public</filename> je ještě skrytý soubor
                 <filename>.htaccess</filename></para>
         <para>Aplikace je uložena v adresáři <filename>application</filename>. Jak je vidět na
-            obrázku, máme samostatné adresáře pro soubory modelu, view a controllerů. Adresář
-                <filename>public/</filename> je adresář přístupný z webu, takže URL naší aplikace
-            bude <uri>http://localhost/zf-tutorial/public/</uri>. Díky tomu není většina aplikace
-            přístupná z webu a je tudíž bezpečnější.</para>
-        <para><emphasis role="bold">Poznámka:</emphasis> Na živém serveru by jste vytvořili virtual host a nastavili document root
-            přímo do adresáře <filename>public</filename>. Například pokud by jste vytvářeli virtual
-            host pojmenovaný <code>zf-tutorial.localhost</code>, tak by to vypadalo nějak
-            takto:</para>
+            obrázku, máme samostatné adresáře pro soubory modelů, view a kontrolerů. Adresář
+                <filename>public/</filename> by byl na produkčním serveru jako jediný přístupný z
+            webu. URL naší aplikace na localhostu bude
+                <uri>http://localhost/zf-tutorial/public/</uri>.</para>
+        <para><emphasis role="bold">Poznámka:</emphasis> Na živém serveru by jste vytvořili virtual
+            host a nastavili document root přímo do adresáře <filename>public</filename>. Například
+            pokud by jste vytvářeli virtual host pojmenovaný <code>zf-tutorial.localhost</code>, tak
+            by to vypadalo nějak takto:</para>
         <programlisting language="apache"><![CDATA[<VirtualHost *:80>
     ServerName zf-tutorial.localhost
     DocumentRoot /var/www/html/zf-tutorial/public
@@ -300,12 +302,12 @@
                 využitím souboru <filename>.htaccess</filename> v adresáři
                     <filename>zf-tutorial/public</filename>, který pro nás vytvořil
                     <code>Zend_Tool</code>. Ten přesměrová všechny požadavky na
-                    <filename>public/index.php</filename>, který nám také vytvořil
-                    <code>Zend_Tool</code>.</para>
+                    <filename>public/index.php</filename>, který nám také <code>Zend_Tool</code>
+                vytvořil.</para>
             <para>Soubor <filename>index.php</filename> tvoří vstupní bod do naší aplikace a jeho
                 úkolem je inicializace aplikace vytvořením instance <code>Zend_Application</code> a
                 nastavení konstant <code>APPLICATION_PATH</code> a <code>APPLICATION_ENV</code>,
-                který definují cestu do adresáře <filename>application/</filename> a prostředí
+                které definují cestu do adresáře <filename>application/</filename> a prostředí
                 (neboli mód) aplikace. Výchozím prostředím je <code>production</code> a je vhodné ho
                 změnit na <code>development</code> přidání řádku do souboru
                     <filename>.htaccess</filename>:</para>
@@ -322,27 +324,27 @@
                     <code>Zend_Config_Ini</code>. Ten umí interpretovat dědičnost sekcí, kterou
                 uvedeme pomocí dvojtečky. Například: </para>
             <programlisting language="ini">[staging : production]</programlisting>
-            <para>To znamená, že sekce <code>staging</code> dědí nastavení sekce
+            <para>znamená, že sekce <code>staging</code> dědí nastavení sekce
                     <code>production</code>. Konstanta <code>APPLICATION_ENV</code> určuje, která
                 sekce se načte. Při vývoji chceme používat sekci <code>development</code> a na živém
                 serveru <code>production</code>. Všechny změny v <code>application.ini</code> budeme
-                vkládat do sekce <code>production</code>. Tím docílíme toho,že všechny varianty
-                konfigurace budou obsahovat to, co jsme přidali.</para>
+                vkládat do sekce <code>production</code>. Tím docílíme toho, že všechny varianty
+                konfigurace budou obsahovat to, co jsme přidali do <code>production</code>.</para>
         </section>
         <section>
             <title>Úpravy souboru application.ini</title>
             <para>První změna kterou musíme udělat je nastavení naší časové zóny, aby správně
                 fungovaly PHPčkové funkce pro práci s datem a časem. Upravíme
-                    <filename>application/configs/application.ini</filename> a přidáme:</para>
+                    <filename>application/configs/application.ini</filename> a pod všechny hodnoty
+                    <code>phpSettings</code> v sekci <code>[production]</code> přidáme:</para>
             <programlisting language="ini">phpSettings.date.timezone = "Europe/Prague"</programlisting>
-            <para>pod všechny hodnoty <code>phpSettings</code> v sekci <code>[production]</code>.
-                Samozřejmě volbu můžeme upravit podle své časové zóny. Teď už jsme připraveni začít
-                přidávat kód specifický pro naši aplikaci.</para>
+            <para>Samozřejmě volbu můžeme upravit podle vlastní časové zóny. Teď už jsme připraveni
+                začít přidávat kód specifický pro naši aplikaci.</para>
         </section>
     </section>
     <section>
         <title>Kód naší aplikace</title>
-        <para>Předtím než začneme nastavovat naše soubory, je nutné pochopit, jak je aplikace v Zend
+        <para>Předtím než začneme upravovat soubory, je nutné pochopit, jak je aplikace v Zend
             Frameworku strukturovaná. Každá stránka aplikace je označována jako <emphasis
                 role="bold">akce</emphasis> [en: action] a ty jsou seskupeny v <emphasis role="bold"
                 >kontrolerech</emphasis> [en: controller]. Pro URL ve formátu
@@ -351,7 +353,7 @@
             akcí. Například kontroler <code>News</code> může mít akce <code>list</code>,
                 <code>archived</code>, <code>view</code>. MVC systém Zend Frameworku podporuje také
             moduly, které slouží k seskupování kontrolerů. Tato aplikace nebude tak veliká, abychom
-            se s nimi museli zabývat.</para>
+            se jimi museli zabývat.</para>
         <para>V základním nastavení si Zend Framework rezervuje akci <code>index</code> jako
             výchozí. To je pro případy jako je <uri>http://localhost/zf-tutorial/public/news/</uri>,
             kdy není akce zadána. Zavolá se tedy výchozí akce <code>index</code>. Existuje také
@@ -407,10 +409,10 @@
     </section>
     <section>
         <title>Vytvoření kontroleru</title>
-        <para>Třída kontroleru v Zend Frameworku musí být pojmenována <code>{jméno
-                kontroleru}Controller</code>. Všimněte si že <code>{jméno kontroleru}</code> musí
-            začínat velkým písmenem. Tato třída musí být uložena v souboru <filename>{jméno
-                Kontroleru}Controller.php</filename> v adresáři
+        <para>Třída kontroleru v Zend Frameworku musí být pojmenována <code>{Jméno
+                kontroleru}Controller</code>. Všimněte si že <code>{Jméno kontroleru}</code> musí
+            začínat velkým písmenem. Tato třída musí být uložena v souboru <filename>{Jméno
+                kontroleru}Controller.php</filename> v adresáři
                 <filename>application/controllers</filename>. Každá akce je <code>public</code>
             funkce ve třídě kontroleru a musí být pojmenována <code>{jméno akce}Action</code>. V
             tomto případě začíná <code>{jméno akce}</code> malým písmenem a i zbytek musí být malými
@@ -420,10 +422,10 @@
         <para>Třída našeho kontroleru <code>IndexController</code> je uložena v souboru
                 <filename>application/controllers/ IndexController.php</filename>, který nám
             automaticky vygeneroval Zend_Tool. Obsahuje také první akci, <code>indexAction()</code>,
-            takže musíme přidat jen ty zbývající.</para>
+            takže musíme přidat jen ty ostatní.</para>
         <para>Další akce se do kontroleru přidávají pomocí nástroje <application>zf</application> a
-            příkazu <command>create action</command>. Otevřeme Terminál nebo příkazovou řádku,
-            přejdeme do našeho adresáře <filename>zf-tutorial/</filename> a zadáme tyto tři příkazy: </para>
+            příkazu <code>create action</code>. Otevřeme Terminál nebo příkazovou řádku, přejdeme do
+            našeho adresáře <filename>zf-tutorial/</filename> a zadáme tyto tři příkazy: </para>
         <programlisting>zf create action add Index
 zf create action edit Index
 zf create action delete Index</programlisting>
@@ -447,19 +449,19 @@ zf create action delete Index</programlisting>
                     <tbody>
                         <row>
                             <entry>http://localhost/zf-tutorial/public/</entry>
-                            <entry>IndexController::indexAction()</entry>
+                            <entry><code>IndexController::indexAction()</code></entry>
                         </row>
                         <row>
                             <entry>http://localhost/zf-tutorial/public/index/add</entry>
-                            <entry>IndexController::addAction()</entry>
+                            <entry><code>IndexController::addAction()</code></entry>
                         </row>
                         <row>
                             <entry>http://localhost/zf-tutorial/public/index/edit</entry>
-                            <entry>IndexController::editAction()</entry>
+                            <entry><code>IndexController::editAction()</code></entry>
                         </row>
                         <row>
                             <entry>http://localhost/zf-tutorial/public/index/delete</entry>
-                            <entry>IndexController::deleteAction()</entry>
+                            <entry><code>IndexController::deleteAction()</code></entry>
                         </row>
                     </tbody>
                 </tgroup>
@@ -483,16 +485,15 @@ zf create action delete Index</programlisting>
             čas se podívat na datový model naší aplikace. Připomeňme, že model je ta část, která se
             stará o hlavní úkol aplikace (někdy také nazývané <quote>business rules</quote>. V našem
             případě se stará o databázi. Použijeme třídu <classname>Zend_Db_Table</classname>, která
-            nám bude hledat, vkládat a mazat řádky z databázové tabulky.</para>
+            nám bude vybírat, vkládat a mazat řádky z databázové tabulky.</para>
         <section>
             <title>Nastavení databáze</title>
-            <para> Abychom mohli použít <classname>Zend_Db_Table</classname>, musíme nastavit, která
-                databáze se má použít a s jakým uživatelským jménem a heslem se má přistupovat.
-                Protože to nechceme dát natvrdo do aplikace, uložíme údaje do konfiguračního
-                souboru. Komponenta <classname>Zend_Application</classname> má resource pro
-                připojení k databázi, takže všechno co musíme udělat je nastavit příslušné údaje v
-                souboru <filename>configs/application.ini</filename> a ona se postará o
-                zbytek.</para>
+            <para>Abychom mohli používat <classname>Zend_Db_Table</classname>, musíme nastavit, ke
+                které databázi se má připojit a jaké se má použít uživatelské jméno a heslo. Protože
+                to nechceme dát natvrdo do aplikace, uložíme údaje do konfiguračního souboru.
+                Komponenta <classname>Zend_Application</classname> má resource pro připojení k
+                databázi, takže všechno co musíme udělat je nastavit příslušné údaje v souboru
+                    <filename>configs/application.ini</filename> a ona se postará o zbytek.</para>
             <para>Otevřeme <filename>configs/application.ini</filename> a přidáme následující řádky
                 na konec sekce <code>[production]</code> (t.j. nad sekci
                 <code>[staging]</code>):</para>
@@ -501,15 +502,16 @@ resources.db.params.host = localhost
 resources.db.params.username = rob
 resources.db.params.password = 123456
 resources.db.params.dbname = zf-tutorial</programlisting>
-            <para>Samozřejmě by jste měli použít svoje uživatelské jméno, heslo a název databáze, ne
-                moje! Teď se nám bude databázové spojení vytvářet automaticky a nastaví se jako
-                výchozí adaptér <classname>Zend_Db_Table</classname>. O dalším dostupných resource
-                pluginech si můžete přečíst zde:
-                http://framework.zend.com/manual/en/zend.application.available-resources.html</para>
+            <para>Samozřejmě použijete svoje uživatelské jméno, heslo a název databáze, ne moje! Teď
+                se nám bude databázové spojení vytvářet automaticky a také se nastaví jako výchozí
+                adaptér <classname>Zend_Db_Table</classname>. O dalším dostupných resource pluginech
+                si můžete přečíst zde: <link
+                    xlink:href="http://framework.zend.com/manual/en/zend.application.available-resources.html"
+                    >http://framework.zend.com/manual/en/zend.application.available-resources.html</link></para>
         </section>
         <section>
             <title>Vytvoření databázové tabulky</title>
-            <para>Jak jsme říkali na začátku, bude pro ukládání dat o albech používat databázi.
+            <para>Jak jsme říkali na začátku, budeme pro ukládání dat o albech používat databázi.
                 Použijeme MySQL, takže příkaz pro vytvoření tabulky je:</para>
             <programlisting language="sql">CREATE TABLE albums (
   id int(11) NOT NULL auto_increment,
@@ -522,8 +524,8 @@ resources.db.params.dbname = zf-tutorial</programlisting>
         </section>
         <section>
             <title>Vložení testovacích dat</title>
-            <para>Také bychom do tabulky měli vložit nějaké řádky, abychom mohli otestovat, jestli
-                nám hlavní stránka správně načítá data. Použijeme prvních pár
+            <para>Také bychom do tabulky měli vložit nějaká data, abychom mohli otestovat, jestli
+                nám je hlavní stránka správně načítá. Použijeme prvních pár
                     <quote>Nejprodávanějších</quote> CD z britského Amazonu. Ve svém MySQL klientovi
                 spusťte:</para>
             <programlisting language="sql"><![CDATA[INSERT INTO albums (artist, title) VALUES
@@ -533,8 +535,7 @@ resources.db.params.dbname = zf-tutorial</programlisting>
     ('Andre Rieu', 'Forever Vienna'),
     ('Sade', 'Soldier of Love');]]>
             </programlisting>
-            <para>Teď už máme v naší databázi nějaká data a můžeme pro ni napsat velmi jednoduchý
-                model.</para>
+            <para>Teď už máme databázi i data a můžeme pro ně napsat velmi jednoduchý model.</para>
         </section>
     </section>
     <section>
@@ -542,7 +543,7 @@ resources.db.params.dbname = zf-tutorial</programlisting>
         <para>V Zend Frameworku není třída <classname>Zend_Model</classname>, protože model je vaše
             business logika a rozhodnutí jak s ní pracovat je na vás. Existuje mnoho komponent,
             které můžete použít podle toho, co potřebujete. Jeden přístup je použití tříd modelu,
-            které každá reprezentuje jednu entitu ve vaší aplikaci, a využít mapovací objekty, které
+            kdy každá reprezentuje jednu entitu ve vaší aplikaci, a využít mapovací objekty, které
             načítají a ukládají entity do databáze. Tento přístup je popsán v Zend Framework
             QuickStart na adrese <link
                 xlink:href="http://framework.zend.com/manual/en/learning.quickstart.create-model.html"
@@ -556,10 +557,10 @@ resources.db.params.dbname = zf-tutorial</programlisting>
             třídu, které je specifická pro správu alb. Je jedno, jak naši třídu pojmenujeme, ale
             dává smysl ji pojmenovat jako databázovou tabulku. Náš projekt má výchozí autoloader
             inicitalizovaný <classname>Zend_Application</classname>. Ten mapuje třídy v modulu na
-            adresář, kde jsou uloženy. Pro složky <filename>application/</filename> používáme prefix
-                <classname>Applcation_</classname>.</para>
+            adresář, kde jsou uloženy. Pro složky <filename>application/*</filename> používáme
+            prefix <classname>Applcation_</classname>.</para>
         <para>Autoloader mapuje třídy na adresáře takto:<table frame="all">
-                <title/>
+                <title>Mapování tříd na adresáře</title>
                 <tgroup cols="2">
                     <colspec colname="c1" colnum="1" colwidth="1.0*"/>
                     <colspec colname="c2" colnum="2" colwidth="1.0*"/>
@@ -607,7 +608,7 @@ resources.db.params.dbname = zf-tutorial</programlisting>
             </table></para>
         <para>Protože budeme pro pojmenování používat název tabulky, <code>albums</code>, a protože
             použijeme <classname>Zend_Db_Table</classname>, bude se naše třída jmenovat
-                <classname>Application_Model_DbTable_Albums</classname> a bude uložena v adresáři
+                <classname>Application_Model_DbTable_Albums</classname> a bude uložena v souboru
                 <filename>applications/models/DbTable/Albums.php</filename></para>
         <para>Aby <classname>Zend_Db_Table</classname> věděla, kterou tabulku má spravovat, musíme
             nastavit protected atribut <varname>$_name</varname> na jméno tabulky.
@@ -617,11 +618,11 @@ resources.db.params.dbname = zf-tutorial</programlisting>
         <para>Abychom si ušetřili práci, můžeme použít <command>zf</command> z příkazové řádky.
             Zadáme následující příkaz:</para>
         <programlisting><![CDATA[zf create db-table Albums albums]]></programlisting>
-        <para>Nástroj nám vytvoři soubor <filename>Albums.php</filename> ve složce
+        <para>Nástroj nám vytvořil soubor <filename>Albums.php</filename> ve složce
                 <filename>application/models/DbTable</filename>. V tomto souboru je třída
             pojmenovaná <classname>Application_Model_DbTable_Albums</classname>, která obsahuje
             nastavené jméno databázové tabulky, se kterou tato třída pracuje.</para>
-        <para>Potřebujeme přidat ještě nějakou funkcionalitu, takže upravíme
+        <para>Potřebujeme ještě přidat nějakou funkcionalitu, takže upravíme
                 <filename>application/models/DbTable/Albums.php</filename> a přidáme metody
                 <code>getAlbum()</code>, <code>addAlbum()</code>, <code>updateAlbum()</code> a
                 <code>deleteAlbum()</code>, takže teď to vypadá takhle: </para>
@@ -663,7 +664,7 @@ class Application_Model_DbTable_Albums extends Zend_Db_Table_Abstract
         $this->delete('id =' . (int)$id);
     }
 }]]></programlisting>
-        <para>Vytořili jsme čtyři pomocné metody, které naše aplikace použije jako rozhraní pro
+        <para>Vytvořili jsme čtyři pomocné metody, které naše aplikace použije jako rozhraní pro
             přístup k databázi. <code>getAlbum()</code> načte jeden řádek jako pole,
                 <code>addAlbum()</code> vytvoří nový řádek v databázi, <code>updateAlbum()</code>
             aktualizuje řádek alba v databázi a <code>deleteAlbum()</code> ho smaže. Kód každé z
@@ -684,9 +685,10 @@ $view->setScriptPath('/path/to/scripts');
 echo $view->render('script.php');]]></programlisting>
         <para>Na první pohled je vidět, že je zbytečné opakovat takovýdle nudný kód v každé akci.
             Raději si view zinicializujeme někde jinde a pak jen budeme již inicializovaný objekt
-            používat v jednitlivých akcích. Zend Framework obsahuje Action Helper
+            používat v jednotlivých akcích. Zend Framework obsahuje Action Helper
                 <classname>ViewRenderer</classname>. Ten za nás udělá inicializaci proměnné
-            $this->view v kontroleru a také nám po skončení akce vykreslí view skript</para>
+                <code>$this->view</code> v kontroleru a také nám po skončení akce vykreslí view
+            skript</para>
         <para><classname>ViewRenderer</classname> nastaví instanci <classname>Zend_View</classname>
             tak, aby view skripty hledala ve složce
                 <filename>views/scripts/{jméno-kontroleru}</filename> a ve výchozím nastavení
@@ -712,7 +714,7 @@ echo $view->render('script.php');]]></programlisting>
                 další společné části do skriptu pro layout, do kterého se potom vykreslí kód
                 konkrétního view skriptu pro danou akci.</para>
             <para>Výchozí místo pro ukládání layoutů je <filename>application/layouts/</filename> a
-                existují také resource pro <classname>Zend_Application</classname>, který nám
+                existuje také resource pro <classname>Zend_Application</classname>, který nám
                     <classname>Zend_Layout</classname> nakonfiguruje. Pro vytvoření layout skriptu a
                 úpravu <filename>application.ini</filename> opět použijeme
                     <classname>Zend_Tool</classname>. Z příkazováné řádky zadáme v adresáři
@@ -721,16 +723,16 @@ echo $view->render('script.php');]]></programlisting>
             <para><classname>Zend_Tool</classname> vytvořil složku
                     <filename>application/layouts/scripts</filename> a v ní vytvořil view skript
                     <filename>layout.phtml</filename>. Také upravil
-                    <filename>application.ini</filename> a přidal <code>resources.layout.layoutPath
-                    = APPLICATION_PATH "/layouts/scripts/"</code> do sekce
-                <code>[production]</code>.</para>
-            <para>Na konci zpracování požadavku po skončení běhu jednotlivých akcí
+                    <filename>application.ini</filename> a do sekce <code>[production]</code> přidal
+                    <code>resources.layout.layoutPath = APPLICATION_PATH
+                "/layouts/scripts/"</code>.</para>
+            <para>Na konci zpracování požadavku, po skončení běhu jednotlivých akcí,
                     <classname>Zend_Layout</classname> vykreslí náš layout.
-                    <classname>Zend_Tool</classname> vytvoří základní layout, který jen zobrazí
+                    <classname>Zend_Tool</classname> vytvořil základní layout, který jen zobrazí
                 obsah view skriptu dané akce. Doplníme do něj HTML kód protřebný pro náš web.
                 Otevřete <filename>zf-tutorial/application/layouts/scripts/layout.phtml</filename> a
                 nahraďte původní kód tímto:</para>
-            <programlisting language="php"><![CDATA[<?php
+            <programlisting language="html"><![CDATA[<?php
 $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
 $this->headTitle()->setSeparator(' - ');
 $this->headTitle('Zend Framework Tutorial');
@@ -747,7 +749,7 @@ echo $this->doctype(); ?>]]></programlisting>
 </div>
 </body>
 </html>]]></programlisting>
-            <para>Layout obsahuje vnější HTML kód, který je celkem běžný. A protože to je normální
+            <para>Layout obsahuje vnější HTML kód, který je celkem typický. A protože to je normální
                 PHP soubor, můžete v něm používat PHP. Je k dispozici proměnná
                     <varname>$this</varname>, ve které je instance view, který byla vytvořena během
                 bootstrapování. Můžeme ji použít pro získání dat, která byla vložena do viewčka a
@@ -764,24 +766,24 @@ echo $this->doctype(); ?>]]></programlisting>
                 stránky. View skripty akcí jsou rendrovány dříve a někdy potřebují vědět, který
                 doctype je použit. To je důležité například pro
                 <classname>Zend_Form</classname>.</para>
-            <para>Doctype nastavíme přidáním dalšího řádku do <filename>application.ini</filename>,
-                do sekce <code>[production]</code>:</para>
+            <para>Doctype nastavíme přidáním dalšího řádku do do sekce <code>[production]</code> v
+                    <filename>application.ini</filename>:</para>
             <programlisting language="ini">resources.view.doctype = "XHTML1_STRICT"</programlisting>
             <para>View helper <code>doctype()</code> teď bude vypisovat správný doctype a komponenty
                 jako <classname>Zend_Form</classname> budou generovat odpovídající HTML.</para>
         </section>
         <section>
             <title>Stylování</title>
-            <para>I když je to <quote>jen</quote> tutotoriál, potřebujeme CSS soubor, aby naše
-                aplikace vypadala alespoň trochu reprezentativně! Není jasné, jak nalinkujeme CSS
-                soubor, protože URL neukazuje do správného kořenového adresáře. Naštestí existuje
-                view helper <code>baseUrl()</code>. Ten zpracuje adresu požadavku a vrátí nám
-                potřebný úsek URL.</para>
-            <para>Teď můžeme CSS přidat do <code>&lt;head&gt;</code> v souboru
+            <para>I když je toto <quote>jen</quote> tutoriál, potřebujeme CSS soubor, aby naše
+                aplikace vypadala alespoň trochu k světu! Není jasné, jak nalinkujeme CSS soubor,
+                protože URL neukazuje do správného kořenového adresáře. Naštestí existuje view
+                helper <code>baseUrl()</code>. Ten zpracuje adresu požadavku a vrátí nám potřebný
+                úsek URL.</para>
+            <para>CSS přidáme do <code>&lt;head&gt;</code> v souboru
                     <filename>application/layouts/scripts/layout.phtml</filename>. Použijeme view
                 helper <code>headLink()</code>:</para>
             <para><filename>zf-tutorial/application/layouts/scripts/layout.phtml</filename>:</para>
-            <programlisting language="php"><![CDATA[...
+            <programlisting language="html"><![CDATA[...
 <head>
     <?php echo $this->headMeta(); ?>
     <?php echo $this->headTitle(); ?>
@@ -792,7 +794,7 @@ echo $this->doctype(); ?>]]></programlisting>
             <para>Díky tomu, že jsme použili metodu <code>prependStylesheet()</code>, můžeme později
                 přidat další, více specifické CSS soubory z view skriptů jednotlivých controllerů a
                 ty budou zařazeny až po <filename>site.css</filename>.</para>
-            <para>A nakonec přidme nějaké CSS. V <filename>public/</filename> si vytvoříme adresář
+            <para>Nakonec vytvoříme nějaké CSS. V <filename>public/</filename> si vytvoříme adresář
                     <filename>css</filename> a soubor <filename>site.css</filename> s tímto
                 kódem:</para>
             <para><filename>zf-tutorial/public/css/site.css</filename>:</para>
@@ -832,7 +834,7 @@ form #submitbutton {
 }]]></programlisting>
             <para>Teď už to vypadá trochu lépe, ale jak vidíte, přece jenom nejsem grafik!</para>
             <para>Teď můžeme vyprázdnit všechny čtyři automaticky vygenerované view skripty, abychom
-                je mohli pak naplnit. Takže vzhůru do toho, vyprázdněte soubory
+                je mohli pak znovu naplnit. Takže vzhůru do toho, vyprázdněte soubory
                     <filename>index.phtml</filename>, <filename>add.phtml</filename>,
                     <filename>edit.phtml</filename> and <filename>delete.phtml</filename>, které jak
                 si jistě pamatujete, jsou v adresáři
@@ -843,7 +845,7 @@ form #submitbutton {
         <title>Vypisování alb</title>
         <para>Teď když už máme připravené nastavení, databázi a kostry view skriptů, můžeme pokročit
             hlouběji a zobrazit nějaká alba. Použijeme na to <classname>IndexController</classname>
-            a alba z databáze vypíšeme v <function>indexAction()</function>.</para>
+            a alba z databáze vypíšeme v <methodname>indexAction()</methodname>:</para>
         <para><filename>zf-tutorial/application/controllers/IndexController.php</filename>:</para>
         <programlisting language="php"><![CDATA[...
     function indexAction()
@@ -856,9 +858,9 @@ form #submitbutton {
             Metoda <methodname>fetchAll()</methodname> vrací instanci
                 <classname>Zend_Db_Table_Rowset</classname>, která nám ve view skriptu umožní
             iterovat přes vrácené řádky</para>
-        <para>Teď můžeme naplnit příslušn view skript, <filename>index.phtml</filename>:</para>
+        <para>Teď můžeme naplnit příslušný view skript, <filename>index.phtml</filename>:</para>
         <para><filename>zf-tutorial/application/views/scripts/index/index.phtml</filename></para>
-        <programlisting language="php"><![CDATA[<?php
+        <programlisting language="html"><![CDATA[<?php
 $this->title = "My Albums";
 $this->headTitle($this->title);
 ?>
@@ -886,13 +888,12 @@ $this->headTitle($this->title);
         <para>První věc, ktero uděláme je nastavení titulku stránky (pro layout) a také nastavení
             titulku pro <code>&lt;head&gt;</code> pomocí view helperu <code>headTitle()</code> (ten
             se zobrazí v titulku v prohlížeči). Pak vytvoříme odkaz na přidání nového alba. View
-            helper <classname>url()</classname> je součástí frameworku a umožní nám snadno vytvářet
-            odkazy včetně správní základní URL. Jednoduše mu předáme pole parametrů a on vyřeší
-            zbytek.</para>
+            helper <classname>url()</classname> nám umožní snadno vytvářet odkazy včetně správné
+            křoenové URL. Jednoduše mu předáme pole parametrů a on vyřeší zbytek.</para>
         <para>Dále vytvoříme html tabulku s řádky pro jednotlivá alba. Do nich vypíšeme titulek,
             intepreta a odkazy na editaci a smázání záznamu. Alba procházíme pomocí
                 <code>foreach:</code>. Použijeme alternativní zápis pomocí dvojtečky a
-                <code>endforeach;</code> - kód je čitelnější než když musíte hledat související
+                <code>endforeach;</code> kód je čitelnější než když musíte hledat související
             závorky. Na vytvoření odkazů na editaci a smazání jsme opět použili view helper
                 <code>url()</code>.</para>
         <para>Pokud otevřete <link xlink:href="http://localhost/zf-tutorial/public/"
@@ -935,35 +936,40 @@ class Application_Form_Album extends Zend_Form
     public function init()
     {
         $this->setName('album');
+
         $id = new Zend_Form_Element_Hidden('id');
         $id->addFilter('Int');
+
         $artist = new Zend_Form_Element_Text('artist');
         $artist->setLabel('Artist')
                ->setRequired(true)
                ->addFilter('StripTags')
                ->addFilter('StringTrim')
                ->addValidator('NotEmpty');
+
         $title = new Zend_Form_Element_Text('title');
         $title->setLabel('Title')
               ->setRequired(true)
               ->addFilter('StripTags')
               ->addFilter('StringTrim')
               ->addValidator('NotEmpty');
+
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setAttrib('id', 'submitbutton');
+
         $this->addElements(array($id, $artist, $title, $submit));
     }
 }]]></programlisting>
-        <para>V metodě <methodname>init()</methodname> vytvoříme čtyři elementy - id, artist, title,
+        <para>V metodě <methodname>init()</methodname> vytvoříme čtyři elementy - id, artist, title
             a tlačítko submit. Každému nastavíme nějaké atributy, například popisek (label), který
             bude u políčka vypsán. U id si cheme být jisti, že to je pouze číslo, abychom předešli
             potenciálnímu SQL injection. To řeší filter <classname>Int</classname>.</para>
         <para>Textovým elementům přidáme filtry - <classname>StripTags</classname> a
-                <classname>StringTrim</classname> - tím odebereme HTML a nepotřebné bílé znaky. Také
-            je nastavíme jako povinné (<code>required</code>) a přidáme
+                <classname>StringTrim</classname> - těmi odebereme HTML tagy a nepotřebné bílé
+            znaky. Také je nastavíme jako povinné (<code>required</code>) a přidáme
                 <classname>NotEmpty</classname> validátor, abychom ověřili, že uživatel vyplnil
             potřebné informace. (<classname>NotEmpty</classname> validátor tu není nutný, protože
-            bude automaticky přidán díky <code>setRequired(true);</code>; slouží tu tedy jen jako
+            bude automaticky přidán díky <code>setRequired(true);</code> slouží tu tedy jen jako
             ukázka, jak přidat validátor.)</para>
         <para>Teď potřebujeme formulář zobrazit a poté zpracovat odeslaná data. Vyřešíme to v
                 <methodname>addAction()</methodname> metodě v
@@ -1009,7 +1015,7 @@ class Application_Form_Album extends Zend_Form
             $title = $form->getValue('title');
             $albums = new Application_Model_DbTable_Albums();
             $albums->addAlbum($artist, $title);]]></programlisting>
-        <para>Pokud je formulář validní,pak vytvoříme instanci modelu
+        <para>Pokud je formulář validní, tak vytvoříme instanci modelu
                 <classname>Application_Model_DbTable_Albums</classname> a pomocí dříve vytvořené
             metody <methodname>addAlbum()</methodname> vložíme nový záznam do databáze.</para>
         <programlisting language="php"><![CDATA[$this->_helper->redirector('index');]]></programlisting>
@@ -1018,7 +1024,7 @@ class Application_Form_Album extends Zend_Form
         <programlisting language="php"><![CDATA[        } else {
             $form->populate($formData);
         }]]></programlisting>
-        <para>Pokud zadaná data nejsou validní, pak jimi naplníme formulář a znovu h
+        <para>Pokud zadaná data nejsou validní, pak jimi naplníme formulář a znovu ho
             zobrazíme.</para>
         <para>Teď ještě musíme zařídit vykreslení formuláře ve view skriptu
                 <filename>add.phtml</filename>:</para>
@@ -1035,7 +1041,7 @@ echo $this->form ;
     </section>
     <section>
         <title>Editace alba</title>
-        <para>Editace alba je skoro stejná jako přidávání nového, takže kód je velmi podobný:</para>
+        <para>Editace alba je skoro stejné jako přidání nového, takže kód je velmi podobný:</para>
         <para><filename>zf-tutorial/application/controllers/IndexController.php</filename></para>
         <programlisting language="php"><![CDATA[    ...
     function editAction()
@@ -1075,7 +1081,7 @@ echo $this->form ;
                 $form->populate($albums->getAlbum($id));
             }]]></programlisting>
         <para>Poznamenejme, že toto se provede, když požadavek není odeslán POSTem, protože POST
-            znamená, že formulář byl vyplněn a máme ho zpracovat. Pro první zobrazení formuláře
+            znamená, že formulář byl odeslán a máme ho zpracovat. Pro první zobrazení formuláře
             získáme id z požadavku pomocí metody <methodname>_getParam()</methodname>. Potom z
             modelu získáme záznam s albem a daty naplníme formulář. (Teď už víte, proč metoda
                 <methodname>getAlbum()</methodname> vrací pole!)</para>
@@ -1093,17 +1099,17 @@ $this->title = "Edit album";
 $this->headTitle($this->title);
 echo $this->form ;
 ?>]]></programlisting>
-        <para>Teď už by jde alba i editovat.</para>
+        <para>Teď už jde alba i editovat.</para>
     </section>
     <section>
         <title>Mazání alb</title>
         <para>Aby naše aplikace byla kompletní musíme ještě přidat mazání. Vzhledem k tomu, že u
             každého alba máme odkaz na smazání, tak by se na první pohled zdálo, že album smažeme po
             kliknutí na odkaz. Jenže to je špatně. Připomeňme si principy HTTP protokolu - nevratné
-            akce by neměly být přístupné přes GET, ale přes POST.</para>
+            akce by neměly být přístupné přes GET, ale jen přes POST.</para>
         <para>Při kliknutí na delete zobrazíme potvrzovací fomulář, kde když uživatel vybere
                 <quote>yes</quote>, tak záznam smažeme. Vzhledem k tomu, že formulář je primitivní,
-            vložíme jeho kód přímo do viewčka (<classname>Zend_Form</classname> je možnost, ne
+            vložíme jeho kód přímo do viewčka (<classname>Zend_Form</classname> je jen možnost, ne
             povinnost!).</para>
         <para>Začněme s kódem akce v
             <methodname>IndexController::deleteAction()</methodname>:</para>
@@ -1126,8 +1132,8 @@ echo $this->form ;
         }
     }
     ...]]></programlisting>
-        <para>Stejně jako při přidávání nebo editaci použijeme, ke zjištění zda máme zobrazit
-            potvrzovací formulář nebo provést mazání, metodu požadavku
+        <para>Stejně jako při přidávání nebo editaci použijeme ke zjištění, zda máme zobrazit
+            potvrzovací formulář nebo provést mazání, metodu requestu
                 <methodname>isPost()</methodname>. Pro vlastní smazání použijeme metodu
                 <methodname>deleteAlbum()</methodname> z
                 <classname>Application_Model_DbTable_Albums</classname>. Když požadavek nebude volán
@@ -1171,5 +1177,12 @@ $this->headTitle($this->title);
                 Framework in Action</emphasis>. Další informace jsou k dispozici na na <link
                 xlink:href="http://www.zendframeworkinaction.com"
                 >http://www.zendframeworkinaction.com</link>. Mrkněte na to :)</para>
+        <section>
+            <title>Závěr k překladu</title>
+            <para>Při překladu jsem používal počeštěné anglické pojmy - kontroler mi přijde
+                srozumitelnější než řadič :) Pokud narazíte na jakoukoliv chybu v textu, napište mi
+                prosím na <email>mhujer@gmail.com</email> - buď to opravím v překladu a nebo předám
+                autorovi, aby to opravil v originále.</para>
+        </section>
     </section>
 </article>
