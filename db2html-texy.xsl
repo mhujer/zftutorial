@@ -5,7 +5,7 @@
 
     <xsl:import href="file:///c:/Program Files (x86)/Oxygen XML Editor 12/frameworks/docbook/xsl/oxygen_custom_html.xsl"/>
     
-    <xsl:output indent="yes" />
+    <xsl:output indent="yes" encoding="UTF-8" />
     
     <!-- Programlisting si generuju do texy bloků, které se pak zpracují přes PHP -->
     <xsl:template match="d:programlisting" name="prg">

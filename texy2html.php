@@ -53,6 +53,7 @@ $text = preg_replace_callback(
     },
     $text
 );
+$text = str_replace('<head>', '<head>' . "\n" . '<meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />', $text);
 $text = preg_replace('~<img alt="\[Varování\]" src="(.*)"/>~', '!', $text);
 $text = preg_replace('~<img alt="\[Poznámka\]" src="(.*)"/>~', '&rarr;', $text);
 
