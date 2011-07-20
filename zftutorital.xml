@@ -548,12 +548,12 @@ resources.db.params.dbname = zf-tutorial</programlisting>
             QuickStart na adrese <link
                 xlink:href="http://framework.zend.com/manual/en/learning.quickstart.create-model.html"
                 >http://framework.zend.com/manual/en/learning.quickstart.create-model.html</link>.</para>
-        <para>V tomto tutoriálu vytvoříme model, která dědí od <classname>Zend_Db_Table</classname>
+        <para>V tomto tutoriálu vytvoříme model, který dědí od <classname>Zend_Db_Table</classname>
             a používá <classname>Zend_Db_Table_Row</classname>. Třída
                 <classname>Zend_Db_Table</classname>, implementuje návrhový vzor Table Data Gateway,
             který umožňuje objektově pracovat s daty v databázové tabulce. Mějte na paměti, že vzor
             Table Data Gateway může být ve větších systémech limitující.</para>
-        <para>Z abstraktní třídy <classname>Zend_Db_Table_Abstract</classname> budeme dědit naše
+        <para>Z abstraktní třídy <classname>Zend_Db_Table_Abstract</classname> budeme dědit naši
             třídu, které je specifická pro správu alb. Je jedno, jak naši třídu pojmenujeme, ale
             dává smysl ji pojmenovat jako databázovou tabulku. Náš projekt má výchozí autoloader
             inicitalizovaný <classname>Zend_Application</classname>. Ten mapuje třídy v modulu na
