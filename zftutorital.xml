@@ -554,7 +554,7 @@ resources.db.params.dbname = zf-tutorial</programlisting>
             který umožňuje objektově pracovat s daty v databázové tabulce. Mějte na paměti, že vzor
             Table Data Gateway může být ve větších systémech limitující.</para>
         <para>Z abstraktní třídy <classname>Zend_Db_Table_Abstract</classname> budeme dědit naši
-            třídu, které je specifická pro správu alb. Je jedno, jak naši třídu pojmenujeme, ale
+            třídu, která je specifická pro správu alb. Je jedno, jak naši třídu pojmenujeme, ale
             dává smysl ji pojmenovat jako databázovou tabulku. Náš projekt má výchozí autoloader
             inicitalizovaný <classname>Zend_Application</classname>. Ten mapuje třídy v modulu na
             adresář, kde jsou uloženy. Pro složky <filename>application/*</filename> používáme
